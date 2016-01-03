@@ -6,10 +6,7 @@ import com.luxoft.bankapp.ecxeptions.ClientNotExistsException;
 import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import java.io.*;
 
@@ -87,11 +84,5 @@ public class BankServiceImpl implements BankService
 
 		return client;
 	}
-
-//	@Override
-//	public void removeClientByIndex(Bank bank, int index)
-//	{
-//		bank.removeClientByIndex(index);
-//	}
 
 }

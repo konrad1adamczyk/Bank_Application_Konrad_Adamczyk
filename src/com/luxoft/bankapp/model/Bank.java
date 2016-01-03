@@ -98,7 +98,10 @@ public class Bank implements Report {
 	}
 
 	public boolean removeClient(Client client) {
-		return listOfClients.remove(client);
+		if (!listOfClients.isEmpty()) {
+			return	listOfClients.remove(client);
+		}
+		else return false;
 	}
 
 
@@ -113,8 +116,6 @@ public class Bank implements Report {
 
 	@Override
 	public void printReport() {
-		// a method printReport(), which displays information about the bank and
-		// all clients by calling client.printReport() for each client.
 		listOfClients.forEach(client -> client.printReport());
 		System.out.println("----------------------------------------");
 	}

@@ -128,7 +128,7 @@ public abstract class AbstractAccount implements Account
 
 	@Override
 	public void parseFeed(Map<String, String> feed) {
-
+		setBalance(Float.parseFloat(feed.get("balance")));
 	}
 
 }
