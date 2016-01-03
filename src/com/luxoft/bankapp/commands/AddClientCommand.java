@@ -25,7 +25,7 @@ public class AddClientCommand implements Command {
             float initialOverdraft = Float.parseFloat(UserInterface.getOverdraft());
 
             Client client = new Client(name,gender, initialOverdraft,email,phone,city);
-            BankCommander.currentBank.addClient(BankCommander.currentBank, client);
+            BankCommander.currentBank.addClient(client);
             BankCommander.currentClient = client;
 
         } catch (IOException e) {

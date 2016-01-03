@@ -4,7 +4,7 @@ public class NotEnoughFundsException extends BankException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8634665546378752616L;
 
 	private float amount;
 

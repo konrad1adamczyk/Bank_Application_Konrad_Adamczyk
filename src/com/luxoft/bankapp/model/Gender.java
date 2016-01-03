@@ -1,6 +1,8 @@
 package com.luxoft.bankapp.model;
 
-public enum Gender
+import java.io.Serializable;
+
+public enum Gender implements Serializable
 {
 	MALE("Mr"), FEMALE("Ms");
 	
@@ -16,5 +18,13 @@ public enum Gender
 		return sex;
 	}
 
+	public static Gender parseGender(String sex) {
+		if (sex.equals("m"))
+			return Gender.MALE;
+		else if (sex.equals("f") )
+			return Gender.FEMALE;
+		else
+			return null;
+	}
 	
 }

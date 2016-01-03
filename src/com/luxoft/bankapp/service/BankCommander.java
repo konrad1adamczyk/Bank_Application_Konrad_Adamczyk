@@ -17,15 +17,7 @@ import java.util.TreeMap;
  */
 public class BankCommander {
 
-
-    public static Bank getCurrentBank() {
-        return currentBank;
-    }
-
-    //    BankApplication bankApp = new BankApplication();
-//
     public static Bank currentBank;
-//    bankApp.initialize(currentBank);
 
     public static Client currentClient;
     private static Map<String, Command> commandMap = new TreeMap<String, Command>();

@@ -1,50 +1,49 @@
 package com.luxoft.bankapp.service;
 
-import com.luxoft.bankapp.ecxeptions.ClientExistsException;
 import com.luxoft.bankapp.model.Bank;
-import com.luxoft.bankapp.model.Client;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Konrad on 2016-01-01.
+ * Created by Konrad on 2016-01-03.
  */
 public class BankFeedService {
+    private Bank activeBank;
 
-    public static final String FILE_PATH = "test.txt";
+    public void setBank(Bank bank) {
+        activeBank = bank;
+    }
 
-    public void loadFeed() {
-        FileReader fileReader;
-        BufferedReader bufferedReader;
-        try {
-            fileReader =  new FileReader(FILE_PATH);
-            bufferedReader = new BufferedReader(fileReader);
-            Map<String, String> feedMap = new HashMap<String, String>();
-            String []splitLine;
-            String line = bufferedReader.readLine();
-            String []splitValues;
-            while(line != null){
+    public void loadFeed(String folderStr) {
+        File folder = new File(folderStr);
 
-                splitLine = line.split(";");
-                for(String nodes: splitLine){
-                    splitValues = nodes.split("=");
-                    feedMap.put( splitValues[0], splitValues[1]);
-                }
-                BankCommander.currentBank.parseFeed(feedMap);
-
-                feedMap.clear();
-                splitLine = null;
-                line = bufferedReader.readLine();
+        for (File fileEntry: folder.listFiles()) {
+            if (fileEntry.isFile()) {
+                readFile(fileEntry);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
 
+    private void readFile(File file) {
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                Map<String, String> feedMap = new HashMap<String, String>();
+                String[] record = line.split(";");
+                for (String data: record) {
+                    String[] property = data.split("=");
+                    feedMap.put(property[0], property[1]);
+                }
+                activeBank.parseFeed(feedMap);
+            }
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("File: " + file.getName() + " doesn't exists!");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
 

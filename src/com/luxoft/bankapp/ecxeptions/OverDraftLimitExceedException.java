@@ -5,10 +5,10 @@ import com.luxoft.bankapp.model.Account;
 
 public class OverDraftLimitExceedException extends NotEnoughFundsException {
 
+	private static final long serialVersionUID = -8788487512704578141L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private Account account;
 
 	public OverDraftLimitExceedException(Account account, String msg, float amount) {

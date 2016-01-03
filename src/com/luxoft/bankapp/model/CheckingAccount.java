@@ -1,18 +1,19 @@
 package com.luxoft.bankapp.model;
 
+import java.util.Map;
+
 public class CheckingAccount extends AbstractAccount
 {
+	private static final long serialVersionUID = -2696395068528085812L;
 	private float balance;
 	private float overdraft;
 
+	public CheckingAccount() {
+		super();
+	}
 	public CheckingAccount(float balance)
 	{
 		super(balance);
-	}
-	public CheckingAccount(float balance, float overdraft)
-	{
-		super(balance);
-		this.overdraft = overdraft;
 	}
 	public CheckingAccount(String accountNumber, float balance)
 	{
@@ -29,5 +30,9 @@ public class CheckingAccount extends AbstractAccount
 		return "c";
 	}
 
-
+	@Override
+	public void parseFeed(Map<String, String> feed) {
+		super.parseFeed(feed);
+		overdraft = Float.parseFloat(feed.get("overdraft"));
+	}
 }

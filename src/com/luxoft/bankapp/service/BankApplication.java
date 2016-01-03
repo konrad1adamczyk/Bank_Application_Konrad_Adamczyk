@@ -32,26 +32,10 @@ public class BankApplication
 		BankServiceImpl bankService = new BankServiceImpl();
 
 		Client[] clients = new Client[]
-				{ new Client("Krakow", Gender.MALE, "Saladra Dawid", 7000),
-						new Client("Wroclaw", Gender.FEMALE, "Chrobak Monika", 4500),
-						new Client("Warszawa", Gender.MALE, "Skurski Piotr", 2600),
-						new Client("Krakow", Gender.MALE, "Tympalski Pawel", 5500),
-						new Client("Wroclaw", Gender.FEMALE, "Szpak Aleksandra", 1400),
-						new Client("Gdansk", Gender.MALE, "Raczkowski Przemyslaw", 4000),
-						new Client("Krakow", Gender.MALE, "Rosner Pawel", 800),
-						new Client("Wroclaw", Gender.FEMALE, "Banasik Patrycja", 900),
-						new Client("Gdansk", Gender.FEMALE, "Shaleiko Oksana", 1000),
-						new Client("Krakow", Gender.MALE, "Adamczyk Konrad", 5000),
-						new Client("Warszawa", Gender.MALE, "Krzeminski Jaroslaw", 700),
-						new Client("Zakopane", Gender.MALE, "Chlebda Lukasz", 200) };
-
-
-//		Client[] clients = new Client[]
-//				{ new Client("Lukasz","Krakow","lukasz@gmail.com","123456789", Gender.MALE,1000),
-//						new Client("Franek","Krakow","franek@gmail.com","123456854", Gender.MALE,1000),
-//						new Client("Kasia","Warszawa","Kasia@gmail.com","123456354", Gender.FEMALE,1000) };
-
-
+				{ new Client("Krakow", Gender.MALE, "Saladra Dawid", 7000), new Client("Wroclaw", Gender.FEMALE, "Chrobak Monika", 4500), new Client("Warszawa", Gender.MALE, "Skurski Piotr", 2600),
+				new Client("Krakow", Gender.MALE, "Tympalski Pawel", 5500), new Client("Wroclaw", Gender.FEMALE, "Szpak Aleksandra", 1400), new Client("Gdansk", Gender.MALE, "Raczkowski Przemyslaw", 4000),
+				new Client("Krakow", Gender.MALE, "Rosner Pawel", 800), new Client("Wroclaw", Gender.FEMALE, "Banasik Patrycja", 900), new Client("Gdansk", Gender.FEMALE, "Shaleiko Oksana", 1000),
+				new Client("Krakow", Gender.MALE, "Adamczyk Konrad", 5000), new Client("Warszawa", Gender.MALE, "Krzeminski Jaroslaw", 700), new Client("Zakopane", Gender.MALE, "Chlebda Lukasz", 200) };
 
 		for (int i = 0; i < clients.length; i++)
 		{
@@ -95,7 +79,7 @@ public class BankApplication
 		bankService.removeClient(bank, bank.getClient("Tympalski Pawel"));
 		bankService.removeClient(bank, bank.getClient("Szpak Aleksandra"));
 		bankService.removeClient(bank, bank.getClient("Raczkowski Przemyslaw"));
-		
+
 	}
 
 

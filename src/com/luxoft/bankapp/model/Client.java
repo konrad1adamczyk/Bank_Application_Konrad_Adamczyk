@@ -1,7 +1,7 @@
 package com.luxoft.bankapp.model;
 
 import com.luxoft.bankapp.ecxeptions.BankException;
-import com.luxoft.bankapp.service.FeedException;
+import com.luxoft.bankapp.ecxeptions.FeedException;
 
 
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Client implements Report, Comparable<Client> , Serializable
 {
-
+	private static final long serialVersionUID = -314495632608649981L;
 	private String city;
 	private Gender gender;
 	private String name;
@@ -51,23 +51,7 @@ public class Client implements Report, Comparable<Client> , Serializable
 		this.initialOverdraft = initialOverdraft;
 		this.listOfAccounts = new HashSet<Account>(2);
 	}
-	public Client(String name, String city, String email, String phone, Gender gender) {
-		this(name);
-		this.gender = gender;
-		this.email = email;
-		this.phone = phone;
-		this.city = city;
-		this.listOfAccounts = new HashSet<Account>();
-	}
-	public Client(String name,String city, String email, String phone, Gender gender, float initialOverdraft) {
-		this.listOfAccounts = new HashSet<Account>();
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.gender = gender;
-		this.initialOverdraft = initialOverdraft;
-		this.city = city;
-	}
+
 
 	public Client(String name, Gender gender,float initialOverdraft,String email, String phone, String city) {
 		this(gender,name,  initialOverdraft);
@@ -141,18 +125,12 @@ public class Client implements Report, Comparable<Client> , Serializable
 	{
 		// the customer should override method printReport (), which has to
 		// display information about the customer and all of its accounts
-		 System.out.print("\n" + getClientSalutation() + " " + name + ", Miasto: " + getCity() +"\n" );
+		 System.out.print("\n" + getClientSalutation() + " " + name + ", City: " + getCity() + ", E-mail: " + getEmail()
+				 + ", Phone: " + getPhone()+ ", Initial Overdraft: " + getInitialOverdraft()+"\n" );
 		 listOfAccounts.forEach(account -> account.printReport());
 
 	}
 
-	public Gender getClientGender() {
-		return gender;
-	}
-
-	public void setClientGender(Gender clientGender) {
-		this.gender = clientGender;
-	}
 
 	public String getEmail() {
 		return email;
@@ -223,45 +201,39 @@ public class Client implements Report, Comparable<Client> , Serializable
 		this.city = city;
 	}
 
-	private Account getAccount(String accountType) {
-		for (Account acc: listOfAccounts) {
-			if (acc.getAccountType().equals(accountType)) {
-				return acc;
+
+
+
+
+	public void parseFeed(Map<String, String> feed) {
+		String accountType = feed.get("accounttype");
+		Account account = getAccount(accountType);
+		gender = Gender.parseGender(feed.get("gender"));
+
+		account.parseFeed(feed);
+	}
+
+	private Account getAccount(String accountType) throws FeedException {
+		for (Account account: listOfAccounts) {
+			if (account.getAccountType().equals(accountType)) {
+				return account;
 			}
 		}
 		return createAccount(accountType);
 	}
 
-	private Account createAccount(String accountType) {
-		Account acc;
-		if ("SavingAccount".equals(accountType)) {
-			acc = new SavingAccount(0);
-		} else if ("CheckingAccount".equals(accountType)) {
-			acc = new CheckingAccount(0);
+	private Account createAccount(String accountType) throws FeedException {
+		Account account = null;
+		if ("s".equals(accountType)) {
+			account = new SavingAccount();
+		} else if ("c".equals(accountType)) {
+			account = new CheckingAccount();
 		} else {
-			throw new FeedException("Account type not found "+accountType);
+			throw new FeedException("Account type not found " + accountType);
 		}
-		listOfAccounts.add(acc);
-		return acc;
-	}
+		listOfAccounts.add(account);
 
-	public void parseFeed(Map<String, String> feed) {
-		//accounttype=c|s;balance=100;overdraft=50;name=John;gender=m|f;
-
-		String accountType = feed.get("accounttype");
-		Account acc = getAccount(accountType);
-
-		this.name=feed.get(name);
-
-		if(feed.get("gender").equals("m"))
-			this.setClientGender(Gender.MALE);
-		else
-			this.setClientGender(Gender.FEMALE);
-
-
-		this.initialOverdraft=Float.parseFloat(feed.get("overdraft"));
-
-		acc.parseFeed(feed);
+		return account;
 	}
 
 }

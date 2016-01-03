@@ -1,28 +1,48 @@
 package com.luxoft.bankapp.tests;
 
+import com.luxoft.bankapp.ecxeptions.ClientExistsException;
 import com.luxoft.bankapp.model.*;
-import com.luxoft.bankapp.service.BankFeedService;
+import com.luxoft.bankapp.service.BankApplication;
+import com.luxoft.bankapp.service.BankService;
 import com.luxoft.bankapp.service.BankServiceImpl;
 
+
 /**
- * Created by Konrad on 2016-01-02.
+ * Created by Konrad on 2016-01-03.
  */
 public class TestSerialization {
-    public static void main(String[] args) {
+    public static Bank currentBank;
 
-        BankFeedService bankFeedService = new BankFeedService();
-        bankFeedService.loadFeed();
-        BankServiceImpl bankService = new BankServiceImpl();
+    public static Client currentClient;
 
-        Client client1 = new Client("Konradek","Krakow","Konradek@gmail.com","123456854", Gender.MALE, 1000);
+    public static void main(String[] args) throws ClientExistsException {
 
-        Account savingAccount = new SavingAccount(300);
-        Account checkingAccount = new CheckingAccount(300);
-        bankService.addAccount(client1,savingAccount);
-        bankService.addAccount(client1,checkingAccount);
-        bankService.setActiveAccount(client1,checkingAccount);
+//        BankApplication bankApp = new BankApplication();
+//        currentBank = new Bank("bankTest");
+//        bankApp.initialize(currentBank);
+//        currentBank.printReport();
 
-        bankService.saveClient(client1);
-        System.out.println(bankService.loadClient());
+        BankService bankService = new BankServiceImpl();
+
+        Client client = new Client("Konradek Koba", Gender.MALE, 5432f, "konradek@gmail.com", "294-543-234", "Krakow");
+
+        Client client2 = new Client("Ania Kochana", Gender.FEMALE, 1234f, "ania@gmail.com", "294-569-234", "Krynica");
+
+        bankService.saveClient(client);
+        bankService.saveClient(client2);
+
+        Client recoverClient1 = bankService.loadClient();
+        Client recoverClient2 = bankService.loadClient();
+
+        client2.printReport();
+        recoverClient1.printReport();
+        System.out.println("------------------------");
+        recoverClient2.printReport();
+//        currentBank.printReport();
+
+
     }
 }
+
+
+
