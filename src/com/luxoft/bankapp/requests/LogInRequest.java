@@ -7,7 +7,7 @@ public class LogInRequest implements Request {
     private String name;
 
     public LogInRequest(){
-
+        System.out.println("Welcome ");
     }
 
     public LogInRequest(String name){
