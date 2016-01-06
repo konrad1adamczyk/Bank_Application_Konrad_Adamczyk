@@ -1,17 +1,12 @@
 package com.luxoft.bankapp.network;
 
-import com.luxoft.bankapp.commands.UserInterface;
-import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.requests.*;
-import com.luxoft.bankapp.service.BankCommander;
-import com.luxoft.bankapp.service.BankServiceImpl;
 import com.luxoft.bankapp.util.Validation;
-
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Set;
+
 
 /**
  * Created by KAdamczyk on 2016-01-04.

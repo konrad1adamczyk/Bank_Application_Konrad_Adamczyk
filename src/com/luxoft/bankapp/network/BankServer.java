@@ -1,6 +1,5 @@
 package com.luxoft.bankapp.network;
 
-import com.luxoft.bankapp.commands.UserInterface;
 import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.ClientNotExistsException;
 import com.luxoft.bankapp.ecxeptions.NotEnoughFundsException;
@@ -8,11 +7,8 @@ import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.requests.*;
-import com.luxoft.bankapp.service.BankCommander;
 import com.luxoft.bankapp.service.BankService;
 import com.luxoft.bankapp.service.BankServiceImpl;
-import com.luxoft.bankapp.util.Validation;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,7 +17,6 @@ import java.net.Socket;
 import java.util.Iterator;
 import java.util.Set;
 
-import static com.luxoft.bankapp.service.BankCommander.currentClient;
 
 /**
  * Created by KAdamczyk on 2016-01-04.
@@ -46,7 +41,7 @@ public class BankServer {
         activeBank = bank;
     }
 
-    public Bank getActiveBankBank() { return activeBank ;}
+    public Bank getActiveBank() { return activeBank ;}
 
     public String loginService(Request request) {
         try {
