@@ -1,0 +1,1 @@
+accounttype=c;balance=500;overdraft=50;name=Franiu;gender=m;
