@@ -1,5 +1,6 @@
 package com.luxoft.bankapp.network;
 
+import com.luxoft.bankapp.commands.UserInterface;
 import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.ClientNotExistsException;
 import com.luxoft.bankapp.ecxeptions.NotEnoughFundsException;
@@ -7,14 +8,17 @@ import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.requests.*;
+import com.luxoft.bankapp.service.BankCommander;
 import com.luxoft.bankapp.service.BankService;
 import com.luxoft.bankapp.service.BankServiceImpl;
+import com.luxoft.bankapp.util.Validation;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.Set;
 
 import static com.luxoft.bankapp.service.BankCommander.currentClient;
@@ -25,6 +29,7 @@ import static com.luxoft.bankapp.service.BankCommander.currentClient;
 public class BankServer {
 
     //    protected int serverPort;
+    protected Account activeAccount;
     protected Bank activeBank;
     protected static BankService bankService = new BankServiceImpl();   // nie potrzebny static****************************
     protected Client loggedClient;
@@ -62,9 +67,45 @@ public class BankServer {
         return infoAboutClient;
     }
 
-    public String changeActiveAccountService(Request request) {
-            return "No implemented";
+    public static Account getActiveAccount(Set<Account> accounts ,String accountNumber) throws IOException {
+
+        for (Iterator<Account> it = accounts.iterator(); it.hasNext(); ) {
+            Account ac = it.next();
+            if (ac.getAccountNumber().trim().equals(accountNumber.trim())){
+                return ac;
+            } else {
+                System.out.print("Un correct account number****! ");
+            }
+            ac.printReport();
+        }
+
+        return null;
     }
+
+
+    public String changeActiveAccountService(Request request) {
+        if (loggedClient != null && loggedClient.getActiveAccount() != null) {
+            try {
+                System.out.println("jestem tuttaj ");
+                Set<Account> accounts = loggedClient.getListOfAccounts();
+                activeAccount = getActiveAccount(accounts,((ChangeActiveAccountRequest) request).getAccountNumber() );
+
+                loggedClient.setActiveAccount(activeAccount);
+                System.out.println("Choosen account: ");
+                activeAccount.printReport();
+
+                return "Active account set";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("czy moze tuttaj :>");
+            return "No active client or no accounts.";
+        }
+        return null;
+
+    }
+
 
     public String withdrawService(Request request) {
         try {
@@ -129,7 +170,7 @@ public class BankServer {
                     classnot.printStackTrace();
                 }
 
-            } while (!(request instanceof LogInRequest));
+            } while (!(request instanceof LogOutRequest));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         } finally {

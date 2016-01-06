@@ -97,7 +97,7 @@ public class UserInterface {
         return amountStr;
     }
 
-    static Account getActiveAccount(Set<Account> accounts) throws IOException {
+    public static Account getActiveAccount(Set<Account> accounts) throws IOException {
         System.out.println("Choose account by typing it's account number: ");
         int i =0;
         for (Iterator<Account> it = accounts.iterator(); it.hasNext(); ) {

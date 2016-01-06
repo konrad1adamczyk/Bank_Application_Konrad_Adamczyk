@@ -1,18 +1,23 @@
 package com.luxoft.bankapp.network;
 
+import com.luxoft.bankapp.commands.UserInterface;
+import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.requests.*;
+import com.luxoft.bankapp.service.BankCommander;
 import com.luxoft.bankapp.service.BankServiceImpl;
+import com.luxoft.bankapp.util.Validation;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Set;
 
 /**
  * Created by KAdamczyk on 2016-01-04.
  */
 public class BankClient {
-
+    protected boolean isClientLogedIn = false;
     protected Client theClient = null;
     protected Socket requestSocket;
     protected ObjectOutputStream out;
@@ -21,7 +26,6 @@ public class BankClient {
     protected static final String SERVER = "localhost";
     protected final int port;
     protected Request[] requestArray = {
-//            new LogInRequest(),
             new GetAccountsRequest(),
             new ChangeActiveAccountRequest(),
             new DepositRequest(),
@@ -35,6 +39,9 @@ public class BankClient {
 
     public void printRequests() {
         int i = 1;
+        System.out.println();
+        System.out.println("What would you like to do next, choose one option: ");
+
         for (Request request : requestArray) {
             System.out.print(i + ") ");
             request.printRequestInfo();
@@ -52,7 +59,22 @@ public class BankClient {
     }
 
     public void changeActiveAccount() {
-        System.out.println("\nWrite account number that you wolud like to use: ");
+        String accountNumber = null;
+        System.out.println("Write account Number number: ");
+        try {
+            accountNumber = reader.readLine();
+
+            if (!Validation.checkIsAccountNumber(accountNumber)) {
+                System.out.println("Invalid number selected!");
+                changeActiveAccount();
+            }
+
+            ChangeActiveAccountRequest changeActiveAccountRequest = new ChangeActiveAccountRequest();
+            changeActiveAccountRequest.setAccountNumber(accountNumber);
+            sendRequest(changeActiveAccountRequest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -82,46 +104,49 @@ public class BankClient {
         }
     }
 
-    public void login() throws IOException {
-        System.out.println("\nWrite your name to log in: ");
+    public boolean login() throws IOException {
 
+        System.out.println("\nWrite your name to log in: ");
         if (theClient == null) {
             reader = new BufferedReader(new InputStreamReader(System.in));
             String name = reader.readLine();
             LogInRequest logInRequest = new LogInRequest(name);
             sendRequest(logInRequest);
-
+            isClientLogedIn = true;
         } else {
             System.out.print("\nYour name is: ");
             System.out.println(theClient.getName());
         }
-        System.out.println();
+        return isClientLogedIn;
     }
 
     public void serviceRequest() throws IOException {
         try {
-            login();
 
-            printRequests();
-            reader = new BufferedReader(new InputStreamReader(System.in));
-            String answer = reader.readLine();
+            if (!isClientLogedIn) {
+                login();
+            } else {
+                printRequests();
+                reader = new BufferedReader(new InputStreamReader(System.in));
+                String answer = reader.readLine();
 
-            if (answer.equals("1")) {
-                sendRequest(new GetAccountsRequest());
-            } else if (answer.equals("2")) {
-                changeActiveAccount();
-            } else if (answer.equals("3")) {
-                deposit();
-            } else if (answer.equals("4")) {
-                withdraw();
-            } else if (answer.equals("5")) {
-                message = "bye";
-                sendRequest(new LogOutRequest());
+                if (answer.equals("1")) {
+                    sendRequest(new GetAccountsRequest());
+                } else if (answer.equals("2")) {
+                    changeActiveAccount();
+                } else if (answer.equals("3")) {
+                    deposit();
+                } else if (answer.equals("4")) {
+                    withdraw();
+                } else if (answer.equals("5")) {
+                    message = "bye";
+                    sendRequest(new LogOutRequest());
+                }
             }
-        } catch (IOException e){
-            e.printStackTrace();
         }
-
+    catch (IOException e) {
+        e.printStackTrace();
+        }
     }
 
 

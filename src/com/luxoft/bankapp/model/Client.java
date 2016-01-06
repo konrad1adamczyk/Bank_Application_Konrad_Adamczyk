@@ -132,11 +132,18 @@ public class Client implements Report, Comparable<Client> , Serializable
 
 	public String printReport2()
 	{
+		int i =1;
 		StringBuilder stringBuilder = new StringBuilder();
 
-		stringBuilder.append("\n").append(getClientSalutation()).append(" ").append(name).append(", City: ").append(getCity()).append(", E-mail: ").append(getEmail());
+		stringBuilder.append("\n").append(getClientSalutation()).append(" ").append(name).append(", from City: ").append(getCity()).append(", E-mail: ").append(getEmail())
+				.append(", Phone: ").append(getPhone()).append(", have got accounts: ");
 
-		listOfAccounts.forEach(account -> stringBuilder.append(account.printReport2()).append("\n"));
+//		listOfAccounts.forEach(account -> stringBuilder.append(account.printReport2()));
+
+		for (Account account :listOfAccounts){
+			stringBuilder.append("\n").append(i).append(") ").append(account.printReport2());
+			i++;
+		}
 
 		return stringBuilder.toString();
 	}
