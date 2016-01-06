@@ -7,6 +7,8 @@ import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 
+import java.util.Set;
+
 public interface BankService {
     public void addClient2(Bank bank,Client client) throws ClientExistsException;
     public void removeClient(Bank bank,Client client);
@@ -16,5 +18,5 @@ public interface BankService {
 
     public Client getClient(Bank bank, String clientName) throws ClientNotExistsException;
     public void saveClient(Client client);
-    public Client loadClient();
+    public Set<Client> loadClients(String folderStr);
 }

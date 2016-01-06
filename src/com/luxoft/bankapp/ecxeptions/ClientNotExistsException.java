@@ -16,7 +16,7 @@ public class ClientNotExistsException extends Throwable {
 
     public String printMessage() {
         if (name != null)
-            return "Client with that name not exist: " + name;
+            return "Client with name \"" + name + "\" does not exist: ";
         else
             return "No client";
     }

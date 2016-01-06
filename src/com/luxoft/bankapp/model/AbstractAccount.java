@@ -9,6 +9,7 @@ import java.util.Map;
 
 public abstract class AbstractAccount implements Account, Serializable
 {
+	private static final long serialVersionUID = 7798707441858885781L;
 	private float overdraft;
 	private float balance;
 	protected String accountNumber;
@@ -102,10 +103,18 @@ public abstract class AbstractAccount implements Account, Serializable
 	public void printReport()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("This ").append(this.toString()).append(" with account number: ").append(getAccountNumber()).append("Has balance of ").append(getBalance()).append(" USD");
+		sb.append("This ").append(this.toString()).append(" with account number: ").append(getAccountNumber());
 		System.out.println(sb);
-
 	}
+
+	public String printReport2()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("This ").append(this.toString()).append(" with account number: ").append(getAccountNumber());
+
+		return sb.toString();
+	}
+
 	@Override
 	public float decimalValue() {
 		return ((float) (Math.round(balance * 100)) / 100);

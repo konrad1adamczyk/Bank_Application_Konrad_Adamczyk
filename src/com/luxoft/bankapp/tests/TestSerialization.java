@@ -1,10 +1,14 @@
 package com.luxoft.bankapp.tests;
 
 import com.luxoft.bankapp.ecxeptions.ClientExistsException;
-import com.luxoft.bankapp.model.*;
+import com.luxoft.bankapp.model.Bank;
+import com.luxoft.bankapp.model.Client;
+import com.luxoft.bankapp.model.Gender;
 import com.luxoft.bankapp.service.BankApplication;
 import com.luxoft.bankapp.service.BankService;
 import com.luxoft.bankapp.service.BankServiceImpl;
+
+import java.util.Set;
 
 
 /**
@@ -17,28 +21,30 @@ public class TestSerialization {
 
     public static void main(String[] args) throws ClientExistsException {
 
-//        BankApplication bankApp = new BankApplication();
-//        currentBank = new Bank("bankTest");
-//        bankApp.initialize(currentBank);
+        BankApplication bankApp = new BankApplication();
+        currentBank = new Bank("bankTest");
+        bankApp.initialize(currentBank);
 //        currentBank.printReport();
 
+        Set<Client> listOfClientsInitialized =  currentBank.getListOfClients();
         BankService bankService = new BankServiceImpl();
 
-        Client client = new Client("Konradek Koba", Gender.MALE, 5432f, "konradek@gmail.com", "294-543-234", "Krakow");
+        listOfClientsInitialized.forEach(person -> bankService.saveClient(person));
 
-        Client client2 = new Client("Ania Kochana", Gender.FEMALE, 1234f, "ania@gmail.com", "294-569-234", "Krynica");
 
-        bankService.saveClient(client);
-        bankService.saveClient(client2);
 
-        Client recoverClient1 = bankService.loadClient();
-        Client recoverClient2 = bankService.loadClient();
+//        Client client = new Client("Konradek Ad", Gender.MALE, 5432f, "konradek@gmail.com", "294-543-234", "Krakow");
+//        Client client2 = new Client("Ania Ka", Gender.FEMALE, 1234f, "ania@gmail.com", "291-569-567", "Krynica");
+//
+//        bankService.saveClient(client);
+//        bankService.saveClient(client2);
 
-        client2.printReport();
-        recoverClient1.printReport();
-        System.out.println("------------------------");
-        recoverClient2.printReport();
-//        currentBank.printReport();
+        Set<Client> listOfClientsInTestBank = bankService.loadClients("resources/");
+
+        listOfClientsInTestBank.forEach(person -> person.printReport());
+
+
+
 
 
     }

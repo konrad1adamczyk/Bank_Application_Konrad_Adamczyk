@@ -128,7 +128,17 @@ public class Client implements Report, Comparable<Client> , Serializable
 		 System.out.print("\n" + getClientSalutation() + " " + name + ", City: " + getCity() + ", E-mail: " + getEmail()
 				 + ", Phone: " + getPhone()+ ", Initial Overdraft: " + getInitialOverdraft()+"\n" );
 		 listOfAccounts.forEach(account -> account.printReport());
+	}
 
+	public String printReport2()
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("\n").append(getClientSalutation()).append(" ").append(name).append(", City: ").append(getCity()).append(", E-mail: ").append(getEmail());
+
+		listOfAccounts.forEach(account -> stringBuilder.append(account.printReport2()).append("\n"));
+
+		return stringBuilder.toString();
 	}
 
 

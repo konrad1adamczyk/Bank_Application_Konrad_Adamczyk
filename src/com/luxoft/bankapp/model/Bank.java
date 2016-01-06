@@ -14,6 +14,10 @@ public class Bank implements Report
 		return Collections.unmodifiableSet(listOfClients);
 	}
 
+	public void setListOfClients(Set<Client> listOfClients) {
+		this.listOfClients = listOfClients;
+	}
+
 	private Set<Client> listOfClients=new TreeSet<Client>();
 	private Map<String, Client> clientsMap= new TreeMap<String, Client>();
 

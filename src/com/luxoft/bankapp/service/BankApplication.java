@@ -32,10 +32,19 @@ public class BankApplication
 		BankServiceImpl bankService = new BankServiceImpl();
 
 		Client[] clients = new Client[]
-				{ new Client("Krakow", Gender.MALE, "Saladra Dawid", 7000), new Client("Wroclaw", Gender.FEMALE, "Chrobak Monika", 4500), new Client("Warszawa", Gender.MALE, "Skurski Piotr", 2600),
-				new Client("Krakow", Gender.MALE, "Tympalski Pawel", 5500), new Client("Wroclaw", Gender.FEMALE, "Szpak Aleksandra", 1400), new Client("Gdansk", Gender.MALE, "Raczkowski Przemyslaw", 4000),
-				new Client("Krakow", Gender.MALE, "Rosner Pawel", 800), new Client("Wroclaw", Gender.FEMALE, "Banasik Patrycja", 900), new Client("Gdansk", Gender.FEMALE, "Shaleiko Oksana", 1000),
-				new Client("Krakow", Gender.MALE, "Adamczyk Konrad", 5000), new Client("Warszawa", Gender.MALE, "Krzeminski Jaroslaw", 700), new Client("Zakopane", Gender.MALE, "Chlebda Lukasz", 200) };
+
+					{ new Client("Saladra Dawid", Gender.MALE, 7000, "david@gmail.com", "294-543-234","Krakow" ),
+						new Client("Chrobak Monika", Gender.FEMALE, 4500, "monika@gmail.com", "125-785-456", "Wroclaw" ),
+						new Client("Skurski Piotr", Gender.MALE, 2600, "piotr@gmail.com", "125-345-456", "Warszawa"),
+						new Client("Tympalski Pawel", Gender.MALE, 5500, "pawel@gmail.com", "125-144-666", "Krakow"),
+						new Client("Szpak Aleksandra", Gender.FEMALE, 1400, "alexandra@gmail.com", "132-245-643", "Wroclaw"),
+						new Client("Raczkowski Przemyslaw", Gender.MALE, 4000, "pryemyslaw@gmail.com", "125-723-235", "Gdansk"),
+						new Client("Rosner Pawel", Gender.MALE, 800, "rosner@gmail.com", "253-715-476", "Krakow"),
+						new Client("Banasik Patrycja", Gender.FEMALE, 900, "patrycja@gmail.com", "125-341-634", "Wroclaw"),
+						new Client("Shaleiko Oksana", Gender.FEMALE, 1000, "oksana@gmail.com", "253-253-116", "Gdansk"),
+						new Client("Adamczyk Konrad", Gender.MALE, 5000, "konrad1adamczyk@gmail.com", "609-000-114", "Krakow"),
+						new Client("Krzeminski Jaroslaw", Gender.MALE, 700, "jaro@gmail.com", "232-466-116", "Warszawa"),
+						new Client("Chlebda Lukasz", Gender.MALE, 200, "lukasz@gmail.com", "125-453-343", "Zakopane") };
 
 		for (int i = 0; i < clients.length; i++)
 		{

@@ -16,4 +16,5 @@ public interface Account extends Report{
 	public void parseFeed(Map<String,String> feed);
 
 	public String getAccountNumber();
+	public String printReport2();
 }
