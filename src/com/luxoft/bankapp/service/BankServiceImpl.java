@@ -45,7 +45,7 @@ public class BankServiceImpl implements BankService
 	@Override
 	public Client getClient(Bank bank, String clientName) throws ClientNotExistsException {
 		Validation.checkForNull(clientName);
-
+		Validation.checkIsFullName(clientName);
 		return bank.getClient(clientName);
 	}
 
