@@ -44,6 +44,7 @@ public class BankServer {
     public Bank getActiveBank() { return activeBank ;}
 
     public String loginService(Request request) {
+
         try {
             loggedClient = bankService.getClient(activeBank, ((LogInRequest) request).getLogin());
             StringBuilder sb = new StringBuilder();
