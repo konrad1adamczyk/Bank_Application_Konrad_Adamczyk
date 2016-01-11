@@ -23,7 +23,7 @@ public class ServerThread extends BankServer implements Runnable {
 
     @Override
     public void run() {
-//        BankServerThreaded.incrementCounter();
+        BankServerThreaded.incrementCounter();
         try {
             System.out.println("Connection received from "
                     + clientSocket.getInetAddress().getHostName());

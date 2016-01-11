@@ -16,41 +16,38 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BankServerThreaded implements Runnable {
 
     private int port;
-    private ServerSocket server;
+    private ServerSocket serverSocket;
 
     private static AtomicInteger connectionsCounter = new AtomicInteger();
 
     private Bank bank;
 
-//    private int poolSize = 128;
-//    private ExecutorService pool = Executors.newFixedThreadPool(poolSize);
+    private int poolSize = 128;
+    private ExecutorService pool = Executors.newFixedThreadPool(poolSize);
 
     private boolean isRunning = true;
-//    private BankServerMonitor monitor = new BankServerMonitor();
+    private BankServerMonitor monitor = new BankServerMonitor();
 
     public BankServerThreaded(Bank bank, int port) throws IOException {
         this.port = port;
         this.bank = bank;
-        server = new ServerSocket(port);
+        serverSocket = new ServerSocket(port);
     }
 
     @Override
     public void run() {
-//        pool.execute(monitor);
-        while(isRunning) {
+        pool.execute(monitor);
+        while (isRunning) {
             Socket clientSocket;
             try {
-                clientSocket = server.accept();
+                clientSocket = serverSocket.accept();
                 incrementCounter();
-//                pool.execute(new ServerThread(clientSocket, bank, port));
+                pool.execute(new ServerThread(clientSocket, bank));
 
-				if(connectionsCounter.get() == 0){
-					isRunning = false;
-				}
             } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        System.out.println("end of work");
     }
 
     public void terminate() {

@@ -6,10 +6,6 @@ package com.luxoft.bankapp.network;
 public class BankServerMonitor implements Runnable {
     private boolean running = true;
 
-    public void stopRunning() {
-        running = false;
-    }
-
     @Override
     public void run() {
         while (running) {

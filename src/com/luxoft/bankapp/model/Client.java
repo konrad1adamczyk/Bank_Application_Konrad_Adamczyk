@@ -77,9 +77,10 @@ public class Client implements Report, Comparable<Client> , Serializable
 		this.initialOverdraft = initialOverdraft;
 	}
 
-	public void setActiveAccount(Account activeAccount)
+	public Account setActiveAccount(Account activeAccount)
 	{
 		this.activeAccount = activeAccount;
+		return activeAccount;
 	}
 
 	public Account getActiveAccount() {
