@@ -85,7 +85,7 @@ public class BankServerThreadedTestOneClient {
         }
 
         float amount2 = activeAcccount.getBalance();
-
+        System.out.println(" przed :" + amount1 + ", i po operacjach :" + amount2);
         assertEquals(amount1 - 100, amount2);
 
     }

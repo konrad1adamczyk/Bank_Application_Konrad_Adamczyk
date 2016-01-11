@@ -19,9 +19,6 @@ public class BankClientMockOneClient extends BankClient implements Runnable {
     private final String username = "Adamczyk Konrad";
     private final String accountNumber = "11 317 7694 0000 0000 8266 1516";
 
-
-    //    I withdraw only 1 $ becouse I have created 1000 the same clients,
-//    so to finish my test positively I have to withfraw 1$ thousand times.
     private final float amount = 1;
 
     public BankClientMockOneClient(int port) {
