@@ -34,8 +34,8 @@ public class BankServerThreadedTest {
 //    double amount2 = client.getBalance();
 //    assertEquals(amount-1000, amount2);
 
-
-    private final int NUMBER_OF_MOCKS_CLIENTS = 100;
+    private final int NUMBER_OF_MOCKS_CLIENTS = 5;
+//    private final int NUMBER_OF_MOCKS_CLIENTS = 100;
 //    private final int NUMBER_OF_MOCKS_CLIENTS = 1000;
     protected int port;
     protected static BankService bankService = new BankServiceImpl();
@@ -48,46 +48,82 @@ public class BankServerThreadedTest {
         bank.setListOfClients(listOfClientsInTestBank);
         bank.printReport();
 
-
         Account activeAcccount = new CheckingAccount();
-        Client client = bankService.getClient(bank, "Adamczyk Konrad");
-        Set<Account> listOfMyAccounts = client.getListOfAccounts();
-        for (Account account : listOfMyAccounts){
-            if (account.getAccountType()=="c"){
-                activeAcccount = client.setActiveAccount(account);
+
+        for (Client client1 :listOfClientsInTestBank){
+           String clientName = client1.getName();
+            Set<Account> listOfMyAccounts = client1.getListOfAccounts();
+            for (Account account : listOfMyAccounts){
+                if (account.getAccountType()=="c"){
+                    activeAcccount = client1.setActiveAccount(account);
+                }
             }
+
+            float amount1 = activeAcccount.getBalance();
+
+            BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
+            Thread server = new Thread(bankServerThreaded);
+            server.start();
+
+            List<Thread> mocksClients = new ArrayList<>();
+
+            for (int i = 0; i < NUMBER_OF_MOCKS_CLIENTS; i++) {
+                mocksClients.add(new Thread(new BankClientMock(port)));
+            }
+
+            for (Thread thread : mocksClients) {
+                thread.start();
+            }
+
+            for (Thread thread : mocksClients) {
+                thread.join();
+            }
+//            server.join();
+
+            float amount2 = activeAcccount.getBalance();
+
+            assertEquals(amount1 - 100, amount2);
+
+            port++;
+
         }
 
-
-        System.out.println("************************************************************************************************************");
-        System.out.println(activeAcccount.getAccountNumber());
-        System.out.println("************************************************************************************************************");
-
-        float amount1 = activeAcccount.getBalance();
-
-        BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
-        Thread server = new Thread(bankServerThreaded);
-        server.start();
-
-        List<Thread> mocksClients = new ArrayList<>();
-
-        for (int i = 0; i < NUMBER_OF_MOCKS_CLIENTS; i++) {
-            mocksClients.add(new Thread(new BankClientMock(port)));
-        }
-
-        for (Thread thread : mocksClients) {
-            thread.start();
-        }
-
-        for (Thread thread : mocksClients) {
-            thread.join();
-        }
-
-        float amount2 = activeAcccount.getBalance();
-
-        assertEquals(amount1 - 100, amount2);
+//        Client client = bankService.getClient(bank, "Adamczyk Konrad");
+//        Set<Account> listOfMyAccounts = client.getListOfAccounts();
+//        for (Account account : listOfMyAccounts){
+//            if (account.getAccountType()=="c"){
+//                activeAcccount = client.setActiveAccount(account);
+//            }
+//        }
+//
+//
+//        System.out.println("************************************************************************************************************");
+//        System.out.println(activeAcccount.getAccountNumber());
+//        System.out.println("************************************************************************************************************");
+//
+//        float amount1 = activeAcccount.getBalance();
+//
+//        BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
+//        Thread server = new Thread(bankServerThreaded);
+//        server.start();
+//
+//        List<Thread> mocksClients = new ArrayList<>();
+//
+//        for (int i = 0; i < NUMBER_OF_MOCKS_CLIENTS; i++) {
+//            mocksClients.add(new Thread(new BankClientMock(port)));
+//        }
+//
+//        for (Thread thread : mocksClients) {
+//            thread.start();
+//        }
+//
+//        for (Thread thread : mocksClients) {
+//            thread.join();
+//        }
+//
+//        float amount2 = activeAcccount.getBalance();
+//
+//        assertEquals(amount1 - 100, amount2);
 
     }
-
-
 }

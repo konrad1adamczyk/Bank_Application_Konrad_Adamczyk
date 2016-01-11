@@ -22,7 +22,8 @@ public class BankServerThreaded implements Runnable {
 
     private Bank bank;
 
-    private int poolSize = 128;
+//    private int poolSize = 128;
+private int poolSize = 128;
     private ExecutorService pool = Executors.newFixedThreadPool(poolSize);
 
     private boolean isRunning = true;

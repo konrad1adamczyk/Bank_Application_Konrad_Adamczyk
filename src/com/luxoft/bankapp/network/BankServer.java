@@ -67,10 +67,13 @@ public class BankServer {
 
         for (Iterator<Account> it = accounts.iterator(); it.hasNext(); ) {
             Account ac = it.next();
+
+
+//            ***************************************************************************************************************
             if (ac.getAccountNumber().trim().equals(accountNumber.trim())){
                 return ac;
             } else {
-                System.out.print("Un correct account number****! ");
+                System.out.print("Un correct account number****! \n\n");
             }
             ac.printReport();
         }
@@ -82,7 +85,7 @@ public class BankServer {
     public String changeActiveAccountService(Request request) {
         if (loggedClient != null && loggedClient.getActiveAccount() != null) {
             try {
-                System.out.println("jestem tuttaj ");
+
                 Set<Account> accounts = loggedClient.getListOfAccounts();
                 activeAccount = getActiveAccount(accounts,((ChangeActiveAccountRequest) request).getAccountNumber() );
 
@@ -95,7 +98,7 @@ public class BankServer {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("czy moze tuttaj :>");
+
             return "No active client or no accounts.";
         }
         return null;
