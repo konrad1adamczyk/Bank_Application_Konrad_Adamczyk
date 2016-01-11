@@ -1,0 +1,70 @@
+- Find all the students who take a course 'Databases' and get 5
+
+Select s.name as Student_Name, c.name as Course_Name, mark
+from courses as c
+    inner join marks as m
+    on m.COURSE_ID = c.ID
+    inner join students as s
+    on s.ID = m.STUDENT_ID
+where c.name = 'Databases'
+and mark =5;
+
+- List all the groups with number of students in each group
+Select g.name , count(student_id) as Count_Of_Student
+from marks as m
+    inner join COURSES as c
+    on m.COURSE_ID = c.ID
+    inner join GROUPS_COURSES as gc
+    on gc.COURSE_ID = c.ID
+    inner join GROUPS as g
+    on gc.GROUP_ID = g.ID
+group by g.name;
+
+- Find all the courses that the student has attended
+Select c.name, s.name
+from students as s
+    inner join marks as m
+    on m.course_id =s.id
+    inner join COURSES as c
+    on m.COURSE_ID = c.ID
+where s.name = 'Konrad Adamczyk'
+;
+
+- List all the marks in group for some course
+Select m.mark , gc.group_id
+from marks as m
+    inner join COURSES as c
+    on m.COURSE_ID = c.ID
+    inner join GROUPS_COURSES as gc
+    on gc.COURSE_ID = c.ID
+where gc.group_id = 2;
+
+- List all marks of the student
+Select m.mark, s.name
+from students as s
+    join marks as m
+    on m.course_id =s.id
+where s.name = 'Konrad Adamczyk'
+;
+
+- List all the students in group, grouping by academic achievement
+- (Excellent, Good, Average, Bad)
+select s.name, m.comments
+from students as s
+    inner join marks as m
+    on m.course_id =s.id
+order by comments
+;
+
+- Display the schedule of all courses with the names of teachers
+- and the dates of the course
+
+select t.name, c.name, g.START_DATE, g.FINISH_DATE
+from groups as g
+join GROUPS_COURSES as gc
+on gc.GROUP_ID =g.ID
+join COURSES as c
+on c.ID =gc.COURSE_ID
+join trainers as t
+on t.ID =c.TRAINER_ID
+;e
