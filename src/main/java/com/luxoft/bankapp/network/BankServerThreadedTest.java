@@ -82,7 +82,7 @@ public class BankServerThreadedTest {
 
             float amount2 = activeAcccount.getBalance();
 
-            assertEquals(amount1 - 100, amount2);
+            assertEquals(0.0, amount2, 0.01);
 
             port++;
 
