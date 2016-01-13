@@ -6,7 +6,6 @@ import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.CheckingAccount;
 import com.luxoft.bankapp.model.Client;
-import com.luxoft.bankapp.service.BankApplication;
 import com.luxoft.bankapp.service.BankService;
 import com.luxoft.bankapp.service.BankServiceImpl;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class BankServerThreadedTest {
 
     @Test
     public void test() throws ClientExistsException, InterruptedException, IOException, ClientNotExistsException {
-        port = 2004;
+            port = 2004;
         Bank bank = new Bank("Nowy Bank");
         Set<Client> listOfClientsInTestBank = bankService.loadClients("resources/");
         bank.setListOfClients(listOfClientsInTestBank);
@@ -54,12 +53,14 @@ public class BankServerThreadedTest {
            String clientName = client1.getName();
             Set<Account> listOfMyAccounts = client1.getListOfAccounts();
             for (Account account : listOfMyAccounts){
-                if (account.getAccountType()=="c"){
+                if (account.getAccountType().equals("c")){
                     activeAcccount = client1.setActiveAccount(account);
                 }
             }
 
             float amount1 = activeAcccount.getBalance();
+//            assertEquals(amount1,100.0, 0.01);
+
 
             BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
             Thread server = new Thread(bankServerThreaded);
@@ -84,7 +85,9 @@ public class BankServerThreadedTest {
 
             assertEquals(0.0, amount2, 0.01);
 //            assertEquals(amount1-100, amount2);
+            System.out.println(amount1);
 
+            System.out.println(amount2);
             port++;
 
         }

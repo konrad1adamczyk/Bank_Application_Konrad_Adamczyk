@@ -9,6 +9,9 @@ import java.util.*;
 
 public class Client implements Report, Comparable<Client> , Serializable
 {
+	private int id;
+	private static int counter = 0;
+
 	private static final long serialVersionUID = -314495632608649981L;
 	private String city;
 	private Gender gender;
@@ -23,14 +26,17 @@ public class Client implements Report, Comparable<Client> , Serializable
 
 
 
+
 	public Client(String name)
 	{
+		this.id = counter++;
 		this.name = name;
 		this.listOfAccounts = new HashSet<Account>(2);
 	}
 
 	public Client(String name, float initialOverdraft)
 	{
+		this.id = counter++;
 		this.name = name;
 		this.initialOverdraft = initialOverdraft;
 		this.listOfAccounts = new HashSet<Account>(2);
@@ -38,6 +44,7 @@ public class Client implements Report, Comparable<Client> , Serializable
 
 	public Client(String city, Gender gender,String name, float initialOverdraft)
 	{
+		this.id = counter++;
 		this.city = city;
 		this.gender = gender;
 		this.name = name;
@@ -46,6 +53,7 @@ public class Client implements Report, Comparable<Client> , Serializable
 	}
 	public Client(Gender gender,String name, float initialOverdraft)
 	{
+		this.id = counter++;
 		this.gender = gender;
 		this.name = name;
 		this.initialOverdraft = initialOverdraft;
@@ -252,6 +260,13 @@ public class Client implements Report, Comparable<Client> , Serializable
 		listOfAccounts.add(account);
 
 		return account;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }

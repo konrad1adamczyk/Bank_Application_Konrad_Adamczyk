@@ -9,11 +9,12 @@ import java.util.Map;
 
 public abstract class AbstractAccount implements Account, Serializable
 {
+	private int id;
+
 	private static final long serialVersionUID = 7798707441858885781L;
 	private float overdraft;
 	private float balance;
 	protected String accountNumber;
-	private int id;
 	private static int counter = 0;
 
 	AbstractAccount() {
@@ -145,6 +146,14 @@ public abstract class AbstractAccount implements Account, Serializable
 	@Override
 	public void parseFeed(Map<String, String> feed) {
 		setBalance(Float.parseFloat(feed.get("balance")));
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }

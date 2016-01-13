@@ -9,6 +9,8 @@ import java.util.*;
 public class Bank implements Report
 {
 	private String bankName;
+	private int id;
+	private static int counter = 0;
 
 	public Set<Client> getListOfClients() {
 		return Collections.unmodifiableSet(listOfClients);
@@ -27,6 +29,7 @@ public class Bank implements Report
 
 	public Bank(String bankName)
 	{
+		this.id = counter++;
 		this.setBankName(bankName);
 		listOfClients = new TreeSet<>();
 
@@ -144,4 +147,11 @@ public class Bank implements Report
 		this.bankName = bankName;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
 }
