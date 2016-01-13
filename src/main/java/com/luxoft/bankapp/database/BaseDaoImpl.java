@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class BaseDAOImpl {
+public class BaseDAOImpl implements BaseDAO {
     Connection conn;
     public Connection openConnection() throws DAOException {
         try {
@@ -27,11 +27,12 @@ public class BaseDAOImpl {
 //        return null;
     }
 
-    public void closeConnection() {
+    public Connection closeConnection() {
         try {
             conn.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

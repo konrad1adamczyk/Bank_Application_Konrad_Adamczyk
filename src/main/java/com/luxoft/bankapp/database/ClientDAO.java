@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class ClientDAO {
+public interface ClientDAO {
 
     /**
      * Return client by its name, initialize client accounts.
@@ -18,9 +18,7 @@ public class ClientDAO {
      *
      * @return
      */
-    Client findClientByName(Bank bank, String name) throws DAOException {
-        return null;
-    }
+    Client findClientByName(Bank bank, String name) throws DAOException;
 
     /**
      * Returns the list of all clients of the Bank
@@ -29,24 +27,18 @@ public class ClientDAO {
      *
      * @return
      */
-    List<Client> getAllClients(Bank bank) throws DAOException {
-        return null;
-    }
+    List<Client> getAllClients(Bank bank) throws DAOException;
 
     /**
      * Method should insert new Client (if id == null)
      * Or update client in database
      * //    * @param client
      */
-    void save(Client client) throws DAOException {
-
-    }
+    void save(Client client) throws DAOException;
 
     /**
      * Method removes client from Database
      * //    * @param client
      */
-    void remove(Client client) throws DAOException {
-
-    }
+    void remove(Client client) throws DAOException;
 }

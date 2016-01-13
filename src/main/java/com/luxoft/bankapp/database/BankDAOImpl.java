@@ -12,7 +12,7 @@ import java.sql.SQLException;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class BankDAOImpl extends BaseDAOImpl {
+public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
     Connection conn;
 
     public Bank getBankByName(String name) throws DAOException, BankException {
@@ -39,5 +39,15 @@ public class BankDAOImpl extends BaseDAOImpl {
             closeConnection();
         }
         return bank;
+    }
+
+    @Override
+    public void save(Bank bank) throws DAOException {
+
+    }
+
+    @Override
+    public void remove(Bank bank) throws DAOException {
+
     }
 }

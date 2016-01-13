@@ -47,6 +47,8 @@ public class BankServerThreadedTest {
         bank.setListOfClients(listOfClientsInTestBank);
         bank.printReport();
 
+        BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
+
         Account activeAcccount = new CheckingAccount();
 
         for (Client client1 :listOfClientsInTestBank){
@@ -61,8 +63,7 @@ public class BankServerThreadedTest {
             float amount1 = activeAcccount.getBalance();
 //            assertEquals(amount1,100.0, 0.01);
 
-
-            BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
+//            BankServerThreaded bankServerThreaded = new BankServerThreaded(bank, port);
             Thread server = new Thread(bankServerThreaded);
             server.start();
 
@@ -88,7 +89,7 @@ public class BankServerThreadedTest {
             System.out.println(amount1);
 
             System.out.println(amount2);
-            port++;
+//            port++;
 
         }
 

@@ -7,7 +7,7 @@ import com.luxoft.bankapp.model.Bank;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class BankDAO {
+public interface BankDAO {
     /**
      * Finds Bank by its name.
      * Do not load the list of the clients.
@@ -15,15 +15,8 @@ public class BankDAO {
      * @ Param name
      * @ Return
      */
-    Bank getBankByName(String name) throws DAOException, BankException {
-        return null;
-    }
+    Bank getBankByName(String name) throws DAOException, BankException;
+    void save(Bank bank) throws DAOException;
+    void remove(Bank bank) throws DAOException;
 
-    void save(Bank bank) throws DAOException {
-
-    }
-
-    void remove(Bank bank) throws DAOException {
-
-    }
 }
