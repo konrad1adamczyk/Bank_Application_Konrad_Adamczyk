@@ -3,6 +3,7 @@ package com.luxoft.bankapp.database;
 import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
 import com.luxoft.bankapp.model.Bank;
+import com.luxoft.bankapp.model.Client;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
 
     public Bank getBankByName(String name) throws DAOException, BankException {
         Bank bank = new Bank(name);
-        String sql = "SELECT ID, NAME FROM BANK WHERE name=?";
+        String sql = "SELECT ID, NAME FROM BANKS WHERE name=?;";
         PreparedStatement stmt;
         try {
             openConnection();
@@ -25,7 +26,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
             stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                int id  = rs.getInt("ID");
+                int id  = rs.getInt("BANK_ID");
                 bank.setId(id);
             } else {
                 throw new BankException(name);
@@ -43,11 +44,38 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
 
     @Override
     public void save(Bank bank) throws DAOException {
+        String sql ="INSERT INTO BANKS (NAME) VALUES('" + bank.getBankName() +"');";
+        PreparedStatement stmt;
+        try {
+            openConnection();
+            stmt = conn.prepareStatement(sql);
+            for(Client c : bank.getListOfClients()) {
+                ClientDAOImpl clDaoImpl = new ClientDAOImpl();
+                clDaoImpl.save(c);
+            }
+            if(!stmt.execute())
+                System.out.println("Bank saved");
+        } catch(SQLException e) {
+            throw new DAOException(e.getMessage());
+        } finally {
+            closeConnection();
+        }
 
     }
 
     @Override
     public void remove(Bank bank) throws DAOException {
-
+        String sql = "DELETE FROM BANKS WHERE NAME='" + bank.getBankName() + "');";
+        PreparedStatement stmt;
+        try {
+            openConnection();
+            stmt = conn.prepareStatement(sql);
+            if(!stmt.execute())
+                System.out.println("Bank deleted");
+        } catch(SQLException e) {
+            throw new DAOException(e.getMessage());
+        } finally {
+            closeConnection();
+        }
     }
 }

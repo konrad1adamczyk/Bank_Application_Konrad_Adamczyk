@@ -9,11 +9,14 @@ import java.util.*;
 
 public class Client implements Report, Comparable<Client> , Serializable
 {
+
+	private int bankId;
 	private int id;
 	private static int counter = 0;
 
 	private static final long serialVersionUID = -314495632608649981L;
 	private String city;
+
 	private Gender gender;
 	private String name;
 	private String email;
@@ -22,8 +25,9 @@ public class Client implements Report, Comparable<Client> , Serializable
 	private Set<Account> listOfAccounts = new HashSet<Account>();
 //	private List<Account> listOfAccounts = new ArrayList<Account>();
 	private Account activeAccount;
-	private float initialOverdraft;
 
+	private float initialOverdraft;
+	private float debt;
 
 
 
@@ -61,11 +65,25 @@ public class Client implements Report, Comparable<Client> , Serializable
 	}
 
 
+
 	public Client(String name, Gender gender,float initialOverdraft,String email, String phone, String city) {
 		this(gender,name,  initialOverdraft);
 		this.email = email;
 		this.phone = phone;
 		this.city = city;
+		this.listOfAccounts = new HashSet<Account>(2);
+	}
+	public Client(int id, String name, Gender gender, float initialOverdraft, float debt, String email, String phone, String city, int bankId) {
+
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.initialOverdraft = initialOverdraft;
+		this.debt = debt;
+		this.email = email;
+		this.phone = phone;
+		this.city = city;
+		this.bankId = bankId;
 		this.listOfAccounts = new HashSet<Account>(2);
 	}
 
@@ -267,6 +285,30 @@ public class Client implements Report, Comparable<Client> , Serializable
 
 	public int getId() {
 		return id;
+	}
+
+	public int getBankId() {
+		return bankId;
+	}
+
+	public void setBankId(int bankId) {
+		this.bankId = bankId;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public float getDebt() {
+		return debt;
+	}
+
+	public void setDebt(float debt) {
+		this.debt = debt;
 	}
 
 }

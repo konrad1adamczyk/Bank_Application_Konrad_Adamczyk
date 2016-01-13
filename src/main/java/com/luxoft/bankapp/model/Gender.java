@@ -26,5 +26,14 @@ public enum Gender implements Serializable
 		else
 			return null;
 	}
+
+	public String toSqlString() {
+		if(sex.equals("Mr."))
+			return "m";
+		else if(sex.equals("Mrs."))
+			return "f";
+		else
+			return "";
+	}
 	
 }
