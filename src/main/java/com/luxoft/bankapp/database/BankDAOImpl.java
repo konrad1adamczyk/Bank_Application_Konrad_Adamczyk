@@ -19,7 +19,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
 
     public Bank getBankByName(String name) throws DAOException, BankException {
         Bank bank = new Bank(name);
-        String sql = "SELECT ID, NAME FROM BANKS WHERE name=?;";
+        String sql = "SELECT BANK_ID, BANK_NAME FROM BANKS WHERE BANK_NAME="+name+";";
         PreparedStatement stmt;
         try {
             openConnection();
@@ -42,6 +42,33 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
         }
         return bank;
     }
+
+    public Bank getBankById (int id) throws DAOException, BankException {
+        Bank bank = new Bank("name");
+//        String sql = "SELECT BANK_ID, NAME FROM BANKS WHERE name=?;";
+//        PreparedStatement stmt;
+//        try {
+//            openConnection();
+//            stmt = conn.prepareStatement(sql);
+//            stmt.setString(1, name);
+//            ResultSet rs = stmt.executeQuery();
+//            if (rs.next()) {
+//                int id  = rs.getInt("BANK_ID");
+//                bank.setId(id);
+//            } else {
+//                throw new BankException(name);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw new DAOException();
+//        } catch (BankException e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeConnection();
+//        }
+        return bank;
+    }
+
 
     @Override
     public void save(Bank bank) throws DAOException {

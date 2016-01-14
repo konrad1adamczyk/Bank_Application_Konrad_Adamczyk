@@ -17,6 +17,7 @@ public interface BankDAO {
      * @ Return
      */
     Bank getBankByName(String name) throws DAOException, BankException;
+    Bank getBankById(int id) throws DAOException, BankException;
     void save(Bank bank) throws DAOException;
     void remove(Bank bank) throws DAOException;
     BankInfo getBankInfo(Bank bank);
