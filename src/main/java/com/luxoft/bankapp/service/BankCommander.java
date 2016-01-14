@@ -8,7 +8,6 @@ import com.luxoft.bankapp.model.Client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -23,19 +22,24 @@ public class BankCommander {
     private static Map<String, Command> commandMap = new TreeMap<String, Command>();
 
 
-    static Command[] commands = {            new AddClientCommand(), // 0    ***************
+    static Command[] commands = {
+            new DBSelectBankCommande(),     // 0 ***************
+            new AddClientCommand(), // 1
 
-            new FindClientCommand(), // 1   ***************
-            new OpenAccountCommand(), // 2  ***************
-//            new CloseAccountCommand(), // 3
-            new GetAccountsCommand(), // 4  ***************
-            new SetActiveAccountCommand(), // 5 ***************
+            new FindClientCommand(), // 2
+            new DBSelectClientCommander(),  // 3 ***************
+            new OpenAccountCommand(), // 4
 
-            new DepositCommand(), // 6 ***************
-            new WithdrawCommand(), // 7 ***************
-            new TransferCommand(), // 8
+            new GetAccountsCommand(), // 5
+            new SetActiveAccountCommand(), // 6
 
-            new Command() { // 9 - Exit Command
+            new DepositCommand(), // 7
+            new WithdrawCommand(), // 8
+            new TransferCommand(), // 9
+            new DBRemoveClientCommander(),  // 10 ***************
+            new DBReportCommander(),  // 11 ***************
+
+            new Command() { // 12 - Exit Command
                 @Override
                 public void execute() {
                     System.out.println("Closing the program!");

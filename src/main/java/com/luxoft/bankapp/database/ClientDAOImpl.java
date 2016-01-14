@@ -94,7 +94,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
         }
         else {
             sql = "INSERT INTO CLIENTS VALUES(" +
-                    client.getId() + "," +
+//                    client.getId() + "," +
                     "'" + client.getName() + "'," +
                     "'" + client.getGender().toSqlString() + "'," +
                     + client.getInitialOverdraft() + "," +
