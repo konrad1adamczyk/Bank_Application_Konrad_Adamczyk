@@ -4,6 +4,7 @@ import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
+import com.luxoft.bankapp.network.BankInfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,5 +78,10 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
         } finally {
             closeConnection();
         }
+    }
+
+    @Override
+    public BankInfo getBankInfo(Bank bank) {
+        return new BankInfo(bank);
     }
 }

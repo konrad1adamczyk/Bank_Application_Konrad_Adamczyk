@@ -1,8 +1,6 @@
 package com.luxoft.bankapp.database;
 
-import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
-import com.luxoft.bankapp.ecxeptions.EmailException;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.model.Gender;
@@ -92,7 +90,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
                     "PHONE_NUMBER='" + client.getPhone() + "'," +
                     "City='" + client.getCity() + "'," +
                     "BANK_ID='" + client.getBankId() + "'," +
-                    "WHERE ID=" + client.getId() + ";";
+                    "WHERE CLIENT_ID=" + client.getId() + ";";
         }
         else {
             sql = "INSERT INTO CLIENTS VALUES(" +
@@ -103,10 +101,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
                     + client.getDebt() + "," +
                     "'" + client.getEmail() + "'," +
                     "'" + client.getPhone() + "'," +
-                    "'" + client.getPhone() + "'," +
-                    "'" + client.getPhone() + "'," +
-
-                    client.getInitialOverdraft() + "," +
+                    "'" + client.getCity() + "'," +
                     client.getBankId() + ");";
         }
         PreparedStatement stmt;
@@ -125,11 +120,22 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 
     @Override
     public void remove(Client client) throws DAOException {
-
+        String sql = "DELETE FROM CLIENTS WHERE CLIENT_ID=" + client.getId() + ";";
+        PreparedStatement stmt;
+        try {
+            openConnection();
+            stmt = conn.prepareStatement(sql);
+            if(!stmt.execute())
+                System.out.println("Client removed");
+        } catch(SQLException e) {
+            throw new DAOException(e.getMessage());
+        } finally {
+            closeConnection();
+        }
     }
 
     private boolean clientExistsInDB(Client client) throws DAOException {
-        String sql = "SELECT * FROM CLIENTS WHERE ID=" + client.getId() + ";";
+        String sql = "SELECT * FROM CLIENTS WHERE CLIENT_ID=" + client.getId() + ";";
         PreparedStatement stmt;
         try {
             openConnection();

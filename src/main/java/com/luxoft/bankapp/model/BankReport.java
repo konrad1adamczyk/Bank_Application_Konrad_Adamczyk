@@ -6,21 +6,21 @@ import java.util.*;
  * Created by Konrad on 2015-12-20.
  */
 public class BankReport {
-    public void getNumberOfClients (Bank bank){
+    public static void getNumberOfClients(Bank bank){
         System.out.println("Bank " + bank.getBankName() + " has " + bank.getListOfClients().size() + " happy clients.");
     }
-    public void getAccountsNumber (Bank bank){
+    public static void getAccountsNumber(Bank bank){
         int accountsNumber=0;
 
         for(Client client:bank.getListOfClients())
             accountsNumber+=client.getListOfAccounts().size();
         System.out.println("Bank has " + accountsNumber + " accounts.");
     }
-    public void getClientsSorted (Bank bank){
+    public static void getClientsSorted(Bank bank){
         for(Client client: bank.getListOfClients())
             System.out.println(client.getName());
     }
-    public void getBankCreditSum (Bank bank){
+    public static void getBankCreditSum(Bank bank){
         float credit=0;
         for(Client client:bank.getListOfClients())
             for(Account account: client.getListOfAccounts())
@@ -30,7 +30,7 @@ public class BankReport {
     }
 
 //    ************************************************************************************************************************************************************************
-    public void getClientsByCity(Bank bank) {
+    public static void getClientsByCity(Bank bank) {
         Map<String, List<Client>> clientsCityMap = new HashMap<>();
 
 
@@ -55,6 +55,15 @@ public class BankReport {
         }
         System.out.println(stringBuilder);
 
+    }
+
+    public static void getFullReport(Bank bank) {
+        bank.printReport();
+        getClientsSorted(bank);
+        getBankCreditSum(bank);
+        getNumberOfClients(bank);
+        getAccountsNumber(bank);
+        getClientsByCity(bank);
     }
 
 

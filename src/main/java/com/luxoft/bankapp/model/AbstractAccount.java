@@ -10,6 +10,8 @@ import java.util.Map;
 public abstract class AbstractAccount implements Account, Serializable
 {
 	private int id;
+	private int clientId;
+	private String accountType;
 
 	private static final long serialVersionUID = 7798707441858885781L;
 	private float overdraft;
@@ -34,6 +36,15 @@ public abstract class AbstractAccount implements Account, Serializable
 		this.balance = balance;
 		this.accountNumber = accountNumber;
 	}
+//	public AbstractAccount(int accountId,int clientId, String typeOfAccount,float balance, float overdraft,String accountNumber)
+//	{
+//		this.id = accountId;
+//		this.clientId =clientId;
+//		this.accountType=typeOfAccount;
+//		this.balance = balance;
+//		this.overdraft = overdraft;
+//		this.accountNumber = accountNumber;
+//	}
 
 	public float getBalance() {
 		return balance;
@@ -76,6 +87,9 @@ public abstract class AbstractAccount implements Account, Serializable
 		String newAccountNumberString = newAccountNumber.toString();
 		this.accountNumber = newAccountNumberString;
 
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 	public void withdraw(float amount) throws BankException
@@ -154,6 +168,14 @@ public abstract class AbstractAccount implements Account, Serializable
 
 	public int getId() {
 		return id;
+	}
+
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 }

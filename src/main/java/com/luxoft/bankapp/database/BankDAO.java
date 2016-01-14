@@ -3,6 +3,7 @@ package com.luxoft.bankapp.database;
 import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
 import com.luxoft.bankapp.model.Bank;
+import com.luxoft.bankapp.network.BankInfo;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
@@ -18,5 +19,6 @@ public interface BankDAO {
     Bank getBankByName(String name) throws DAOException, BankException;
     void save(Bank bank) throws DAOException;
     void remove(Bank bank) throws DAOException;
+    BankInfo getBankInfo(Bank bank);
 
 }
