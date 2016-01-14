@@ -21,7 +21,6 @@ public class Client implements Report, Comparable<Client> , Serializable
 	private String name;
 	private String email;
 	private String phone;
-
 	private Set<Account> listOfAccounts = new HashSet<Account>();
 //	private List<Account> listOfAccounts = new ArrayList<Account>();
 	private Account activeAccount;
@@ -140,6 +139,11 @@ public class Client implements Report, Comparable<Client> , Serializable
 	public Set<Account> getListOfAccounts()
 	{
 		return Collections.unmodifiableSet(listOfAccounts);
+	}
+
+
+	public void setListOfAccounts(Set<Account> listOfAccounts) {
+		this.listOfAccounts = listOfAccounts;
 	}
 
 	public String getClientSalutation()

@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
@@ -45,10 +47,11 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
     }
 
     @Override
-    public List<Client> getAllClients(Bank bank) throws DAOException {
+    public Set<Client> getAllClients(Bank bank) throws DAOException {
+
         String sql = "SELECT * FROM CLIENTS WHERE BANK_ID=" + bank.getId() + ";";
         PreparedStatement stmt;
-        List<Client> clientsList = new ArrayList<Client>();
+        Set<Client> clientsList = new TreeSet<Client>();
         try {
             openConnection();
             stmt = conn.prepareStatement(sql);

@@ -5,6 +5,7 @@ import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
@@ -27,7 +28,7 @@ public interface ClientDAO {
      *
      * @return
      */
-    List<Client> getAllClients(Bank bank) throws DAOException;
+    Set<Client> getAllClients(Bank bank) throws DAOException;
 
     /**
      * Method should insert new Client (if id == null)

@@ -6,8 +6,7 @@ import com.luxoft.bankapp.model.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
@@ -90,10 +89,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     @Override
-    public List<Account> getClientAccounts(int idClient) throws DAOException {
+
+    public Set<Account> getClientAccounts(int idClient) throws DAOException {
         String sql = "SELECT * FROM ACCOUNTS WHERE CLIENT_ID=" + idClient + ";";
         PreparedStatement stmt;
-        List<Account> accountsList = new ArrayList<Account>();
+        Set<Account> accountsList = new HashSet<Account>();
+//        List<Account> accountsList = new ArrayList<Account>();
         try {
             openConnection();
             stmt = conn.prepareStatement(sql);

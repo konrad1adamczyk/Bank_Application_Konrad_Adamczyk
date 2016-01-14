@@ -1,15 +1,20 @@
 package com.luxoft.bankapp.service;
 
 import com.luxoft.bankapp.commands.*;
+import com.luxoft.bankapp.database.AccountDAOImpl;
+import com.luxoft.bankapp.database.BankDAOImpl;
+import com.luxoft.bankapp.database.ClientDAOImpl;
+import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.ClientExistsException;
+import com.luxoft.bankapp.ecxeptions.DAOException;
+import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by KAdamczyk on 2015-12-18.
@@ -86,15 +91,33 @@ public class BankCommander {
         System.out.println("Choose a number: ");
     }
 
-    public static void main(String args[]) throws ClientExistsException {
+    public static void main(String args[]) throws BankException, DAOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        BankApplication bankApp = new BankApplication();
+//        BankApplication bankApp = new BankApplication();
+//        currentBank = new Bank("MyBank");
+//        bankApp.initialize(currentBank);
+//        currentBank.printReport();
 
-        currentBank = new Bank("MyBank");
-        bankApp.initialize(currentBank);
+//        ******
+        BankDAOImpl bankDAO = new BankDAOImpl();
+        currentBank = bankDAO.getBankByName("PKO BP");
+
+        ClientDAOImpl clientDAO = new ClientDAOImpl();
+
+        Set<Client> listOfClients =clientDAO.getAllClients(currentBank);
+        currentBank.setListOfClients(listOfClients);
+
+        AccountDAOImpl accountDAO = new AccountDAOImpl();
+
+        for (Client client : listOfClients){
+            client.setListOfAccounts(accountDAO.getClientAccounts(client.getId()));
+        }
+
 
         currentBank.printReport();
+
+
 
         while (true) {
             showMenu();
