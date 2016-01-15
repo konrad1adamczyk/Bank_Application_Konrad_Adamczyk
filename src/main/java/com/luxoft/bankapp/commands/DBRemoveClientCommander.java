@@ -1,5 +1,6 @@
 package com.luxoft.bankapp.commands;
 
+import com.luxoft.bankapp.database.AccountDAOImpl;
 import com.luxoft.bankapp.database.ClientDAO;
 import com.luxoft.bankapp.database.ClientDAOImpl;
 import com.luxoft.bankapp.ecxeptions.ClientNotExistsException;
@@ -21,12 +22,18 @@ public class DBRemoveClientCommander implements Command {
             String name = UserInterface.getFullName();
             Client client = BankCommander.currentBank.getClient(name);
 
+            AccountDAOImpl accountDAO = new AccountDAOImpl();
+            accountDAO.removeByClientId(client.getId());
+
             ClientDAO clientDAO = new ClientDAOImpl();
             clientDAO.remove(client);
+
 
         } catch (IOException | DAOException | ClientNotExistsException e) {
             e.printStackTrace();
         }
+
+
 
     }
 
