@@ -5,16 +5,16 @@ import com.luxoft.bankapp.database.AccountDAOImpl;
 import com.luxoft.bankapp.database.BankDAOImpl;
 import com.luxoft.bankapp.database.ClientDAOImpl;
 import com.luxoft.bankapp.ecxeptions.BankException;
-import com.luxoft.bankapp.ecxeptions.ClientExistsException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
-import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Created by KAdamczyk on 2015-12-18.
@@ -28,11 +28,11 @@ public class BankCommander {
 
 
     static Command[] commands = {
-            new DBSelectBankCommande(),     // 0 ***************
+            new DBSelectBankCommande(),     // 0 x
             new AddClientCommand(), // 1
 
             new FindClientCommand(), // 2
-            new DBSelectClientCommander(),  // 3 ***************
+            new DBSelectClientCommander(),  // 3 x
             new OpenAccountCommand(), // 4
 
             new GetAccountsCommand(), // 5
@@ -42,7 +42,7 @@ public class BankCommander {
             new WithdrawCommand(), // 8
             new TransferCommand(), // 9
             new DBRemoveClientCommander(),  // 10 ***************
-            new DBReportCommander(),  // 11 ***************
+            new DBReportCommander(),  // 11 x
 
             new Command() { // 12 - Exit Command
                 @Override
@@ -97,8 +97,8 @@ public class BankCommander {
 //        BankApplication bankApp = new BankApplication();
 //        currentBank = new Bank("MyBank");
 //        bankApp.initialize(currentBank);
-//        currentBank.printReport();
-
+//        currentBank.printReport()
+//
 //        ******
         BankDAOImpl bankDAO = new BankDAOImpl();
         currentBank = bankDAO.getBankByName("PKO BP");
@@ -113,7 +113,6 @@ public class BankCommander {
         for (Client client : listOfClients){
             client.setListOfAccounts(accountDAO.getClientAccounts(client.getId()));
         }
-
 
         currentBank.printReport();
 

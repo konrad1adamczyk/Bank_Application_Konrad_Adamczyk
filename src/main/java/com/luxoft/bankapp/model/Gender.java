@@ -19,19 +19,19 @@ public enum Gender implements Serializable
 	}
 
 	public static Gender parseGender(String sex) {
-		if (sex.equals("m"))
+		if (sex.equalsIgnoreCase("m"))
 			return Gender.MALE;
-		else if (sex.equals("f") )
+		else if (sex.equalsIgnoreCase("f") )
 			return Gender.FEMALE;
 		else
 			return null;
 	}
 
 	public String toSqlString() {
-		if(sex.equals("Mr."))
-			return "m";
-		else if(sex.equals("Mrs."))
-			return "f";
+		if(sex.equals("Mr"))
+			return "M";
+		else if(sex.equals("Ms"))
+			return "F";
 		else
 			return "";
 	}

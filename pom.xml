@@ -15,9 +15,10 @@
 
     <dependencies>
         <dependency>
+            <scope>compile</scope>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.0.60</version>
+            <version>1.4.190</version>
         </dependency>
     </dependencies>
     

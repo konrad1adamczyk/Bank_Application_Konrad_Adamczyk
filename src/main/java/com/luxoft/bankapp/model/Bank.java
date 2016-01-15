@@ -117,10 +117,15 @@ public class Bank implements Report
 
 	@Override
 	public void printReport()
-	{
+	{ int i=1;
+		for (Client client : listOfClients){
+			System.out.print("\n"+i+") ");
+			client.printReport();
+			i++;
+		}
 		// a method printReport(), which displays information about the bank and
 		// all clients by calling client.printReport() for each client.
-		listOfClients.forEach(client -> client.printReport());
+//		listOfClients.forEach(client -> client.printReport());
 		System.out.println("----------------------------------------");
 	}
 
@@ -154,4 +159,16 @@ public class Bank implements Report
 	public int getId() {
 		return id;
 	}
+
+	public int getNewId() {
+		int newId = 0;
+		for (Client client : listOfClients){
+
+			if( client.getId()> newId ){
+				newId = client.getId();
+			}
+		}
+		return newId+1;
+	}
+
 }

@@ -6,7 +6,6 @@ import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.network.BankInfo;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,16 +14,18 @@ import java.sql.SQLException;
  * Created by KAdamczyk on 2016-01-13.
  */
 public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
-    Connection conn;
+//    Connection conn;
 
     public Bank getBankByName(String name) throws DAOException, BankException {
         Bank bank = new Bank(name);
-        String sql = "SELECT BANK_ID, BANK_NAME FROM BANKS WHERE BANK_NAME="+name+";";
+//        String sql = "SELECT * FROM BANKS;";
+
+        String sql = "SELECT * FROM BANKS ;";
         PreparedStatement stmt;
         try {
             openConnection();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, name);
+//            stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int id  = rs.getInt("BANK_ID");
@@ -43,31 +44,6 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
         return bank;
     }
 
-    public Bank getBankById (int id) throws DAOException, BankException {
-        Bank bank = new Bank("name");
-//        String sql = "SELECT BANK_ID, NAME FROM BANKS WHERE name=?;";
-//        PreparedStatement stmt;
-//        try {
-//            openConnection();
-//            stmt = conn.prepareStatement(sql);
-//            stmt.setString(1, name);
-//            ResultSet rs = stmt.executeQuery();
-//            if (rs.next()) {
-//                int id  = rs.getInt("BANK_ID");
-//                bank.setId(id);
-//            } else {
-//                throw new BankException(name);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw new DAOException();
-//        } catch (BankException e) {
-//            e.printStackTrace();
-//        } finally {
-//            closeConnection();
-//        }
-        return bank;
-    }
 
 
     @Override

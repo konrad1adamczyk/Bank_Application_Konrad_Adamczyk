@@ -8,8 +8,6 @@ import com.luxoft.bankapp.model.Gender;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,7 +27,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
                 int id = rs.getInt("CLIENT_ID");
                 String clientName =  rs.getString("NAME");
                 Gender gender = Gender.parseGender(rs.getString("GENDER")) ;
-                float initialOverdraft = rs.getFloat("INITIALOVERDRAFT");
+                float initialOverdraft = rs.getFloat("Initial_Overdraft");
                 float debt = rs.getFloat("DEBT");
                 String email = rs.getString("EMAIL");
                 String phone = rs.getString("PHONE_NUMBER");
@@ -61,14 +59,14 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
                 int id = rs.getInt("CLIENT_ID");
                 String clientName =  rs.getString("NAME");
                 Gender gender = Gender.parseGender(rs.getString("GENDER")) ;
-                float initialOverdraft = rs.getFloat("INITIALOVERDRAFT");
+                float initialOverdraft = rs.getFloat("Initial_Overdraft");
                 float debt = rs.getFloat("DEBT");
                 String email = rs.getString("EMAIL");
                 String phone = rs.getString("PHONE_NUMBER");
                 String city = rs.getString("City");
                 int bankId = rs.getInt("BANK_ID");
 
-                Client client =  new Client(id, clientName, gender,initialOverdraft, debt, email, phone, city, bankId);
+                Client client =  new Client(id, clientName, gender, initialOverdraft, debt, email, phone, city, bankId);
 
                 clientsList.add(client);
             }
@@ -85,9 +83,10 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
         String sql = "";
         if(clientExistsInDB(client)){
             sql = "UPDATE CLIENTS SET " +
+                    "CLIENT_ID='" + client.getId() + "'," +
                     "NAME='" + client.getName() + "'," +
                     "GENDER='" + client.getGender().toSqlString() + "'," +
-                    "INITIALOVERDRAFT=" + client.getInitialOverdraft() +
+                    "Initial_Overdraft=" + client.getInitialOverdraft() +
                     "DEBT='" + client.getDebt() + "'," +
                     "EMAIL='" + client.getEmail() + "'," +
                     "PHONE_NUMBER='" + client.getPhone() + "'," +
@@ -97,7 +96,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
         }
         else {
             sql = "INSERT INTO CLIENTS VALUES(" +
-//                    client.getId() + "," +
+                    client.getId() + "," +
                     "'" + client.getName() + "'," +
                     "'" + client.getGender().toSqlString() + "'," +
                     + client.getInitialOverdraft() + "," +

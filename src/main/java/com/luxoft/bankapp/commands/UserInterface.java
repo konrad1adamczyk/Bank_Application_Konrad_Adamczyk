@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,6 +27,17 @@ public class UserInterface {
         return name;
     }
 
+    static String getBankName() throws IOException {
+        System.out.println("Enter your bank name: ");
+        String name = reader.readLine();
+//        if (!Validation.checkIsFullName(name)) {
+//            System.out.println("Please provide firstname and surname with first capital letter!");
+//            name = getFullName();
+//        }
+        return name;
+    }
+
+
     static String getEmail() throws IOException {
         System.out.println("Enter email address: ");
         String email = reader.readLine();
@@ -39,6 +49,7 @@ public class UserInterface {
     }
 
     static Gender getGender() throws IOException {
+        Gender gender = Gender.MALE;
         System.out.println("Choose gender: ");
         System.out.println("0) Male ");
         System.out.println("1) Female");
@@ -46,8 +57,9 @@ public class UserInterface {
         if (!Validation.checkIsExpectedNumber(genderStr, 1)) {
             System.out.println("Invalid number selected!");
             getGender();
+
         }
-        Gender gender = null;
+
         switch (genderStr) {
             case "0": gender = Gender.MALE; break;
             case "1": gender = Gender.FEMALE; break;
@@ -135,5 +147,15 @@ public class UserInterface {
             city = getFullName();
         }
         return city;
+    }
+
+    static String getDebt() throws IOException {
+        System.out.println("Enter debt: ");
+        String debtStr = reader.readLine();
+        if (!Validation.checkIsNumeric(debtStr)) {
+            System.out.println("Invalid format of debt!");
+            debtStr = getOverdraft();
+        }
+        return debtStr;
     }
 }

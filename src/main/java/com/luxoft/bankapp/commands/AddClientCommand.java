@@ -19,16 +19,19 @@ public class AddClientCommand implements Command {
     public void execute() {
 
         try {
+            int userId = BankCommander.currentBank.getNewId();
             String name = UserInterface.getFullName();
+
             Gender gender = UserInterface.getGender();
             String city = UserInterface.getCity();
 
             String email = UserInterface.getEmail();
             String phone = UserInterface.getPhone();
-
             float initialOverdraft = Float.parseFloat(UserInterface.getOverdraft());
+            float debt = Float.parseFloat(UserInterface.getDebt());
+            int bankId = BankCommander.currentBank.getId();
 
-            Client client = new Client(name,gender, initialOverdraft,email,phone,city);
+            Client client = new Client(userId, name,gender, initialOverdraft, debt,email,phone,city, bankId);
 
 
             BankCommander.currentBank.addClient(client);
@@ -36,6 +39,7 @@ public class AddClientCommand implements Command {
 
             ClientDAO clientDAO = new ClientDAOImpl();
             clientDAO.save(client);
+            client.printReport();
 
 
         } catch (IOException e) {
@@ -49,6 +53,6 @@ public class AddClientCommand implements Command {
 
     @Override
     public void printCommandInfo() {
-        System.out.print("Add new client.");
+        System.out.print("Add new client to database.");
     }
 }
