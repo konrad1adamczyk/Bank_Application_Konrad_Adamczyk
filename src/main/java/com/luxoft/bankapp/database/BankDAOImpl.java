@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class BankDAOImpl extends BaseDAOImpl implements BankDAO  {
+public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
 //    Connection conn;
 
     public Bank getBankByName(String name) throws DAOException, BankException {

@@ -1,5 +1,6 @@
 package com.luxoft.bankapp.model;
 
+import com.luxoft.bankapp.database.NoDB;
 import com.luxoft.bankapp.ecxeptions.ClientExistsException;
 import com.luxoft.bankapp.ecxeptions.ClientNotExistsException;
 import com.luxoft.bankapp.listeners.ClientRegistrationListener;
@@ -10,7 +11,7 @@ public class Bank implements Report
 {
 	private String bankName;
 	private int id;
-	private static int counter = 0;
+	@NoDB private static int counter = 0;
 
 	public Set<Client> getListOfClients() {
 		return Collections.unmodifiableSet(listOfClients);
@@ -20,10 +21,10 @@ public class Bank implements Report
 		this.listOfClients = listOfClients;
 	}
 
-	private Set<Client> listOfClients=new TreeSet<Client>();
-	private Map<String, Client> clientsMap= new TreeMap<String, Client>();
+	@NoDB private Set<Client> listOfClients=new TreeSet<Client>();
+	@NoDB private Map<String, Client> clientsMap= new TreeMap<String, Client>();
 
-	Set<ClientRegistrationListener> eventListeners = new HashSet<ClientRegistrationListener>();
+	@NoDB Set<ClientRegistrationListener> eventListeners = new HashSet<ClientRegistrationListener>();
 
 
 

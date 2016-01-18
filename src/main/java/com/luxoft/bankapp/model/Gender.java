@@ -1,12 +1,14 @@
 package com.luxoft.bankapp.model;
 
+import com.luxoft.bankapp.database.NoDB;
+
 import java.io.Serializable;
 
 public enum Gender implements Serializable
 {
 	MALE("Mr"), FEMALE("Ms");
-	
-	private String sex;
+
+	@NoDB private String sex;
 	
 	Gender(String sex)
 	{

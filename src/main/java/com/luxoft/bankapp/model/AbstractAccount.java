@@ -1,5 +1,6 @@
 package com.luxoft.bankapp.model;
 
+import com.luxoft.bankapp.database.NoDB;
 import com.luxoft.bankapp.ecxeptions.BankException;
 
 import java.io.Serializable;
@@ -17,7 +18,7 @@ public abstract class AbstractAccount implements Account, Serializable
 	private float overdraft;
 	private float balance;
 	protected String accountNumber;
-	private static int counter = 0;
+	@NoDB private static int counter = 0;
 
 	AbstractAccount() {
 		balance = 0;

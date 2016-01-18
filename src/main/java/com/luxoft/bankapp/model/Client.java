@@ -1,18 +1,21 @@
 package com.luxoft.bankapp.model;
 
+import com.luxoft.bankapp.database.NoDB;
 import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.FeedException;
 
-
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class Client implements Report, Comparable<Client> , Serializable
 {
 
 	private int bankId;
 	private int id;
-	private static int counter = 0;
+	@NoDB private static int counter = 0;
 
 	private static final long serialVersionUID = -314495632608649981L;
 	private String city;
@@ -21,14 +24,18 @@ public class Client implements Report, Comparable<Client> , Serializable
 	private String name;
 	private String email;
 	private String phone;
-	private Set<Account> listOfAccounts = new HashSet<Account>();
+	@NoDB private Set<Account> listOfAccounts = new HashSet<Account>();
 //	private List<Account> listOfAccounts = new ArrayList<Account>();
 	private Account activeAccount;
 
 	private float initialOverdraft;
 	private float debt;
 
-
+	public Client()
+	{
+		this.id = counter++;
+		this.listOfAccounts = new HashSet<Account>(2);
+	}
 
 	public Client(String name)
 	{
@@ -316,4 +323,11 @@ public class Client implements Report, Comparable<Client> , Serializable
 		this.debt = debt;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void addAccount(Account account) {
+		listOfAccounts.add(account);
+	}
 }

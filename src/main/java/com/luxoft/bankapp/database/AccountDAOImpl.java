@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
+public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
     @Override
     public void save(Account account) throws DAOException {
         String accountType = "";

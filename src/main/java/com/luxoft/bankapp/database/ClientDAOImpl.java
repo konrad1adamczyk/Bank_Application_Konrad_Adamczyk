@@ -14,7 +14,7 @@ import java.util.TreeSet;
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
-public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
+public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
     @Override
     public Client findClientByName(Bank bank, String name) throws DAOException {
         String sql = "SELECT * FROM CLIENTS WHERE NAME='" + name + "';";
