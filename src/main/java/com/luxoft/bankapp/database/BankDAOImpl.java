@@ -48,7 +48,7 @@ public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
 
     @Override
     public void save(Bank bank) throws DAOException {
-        String sql ="INSERT INTO BANKS (NAME) VALUES('" + bank.getBankName() +"');";
+        String sql ="INSERT INTO BANKS (BANK_NAME) VALUES('" + bank.getBankName() +"');";
         PreparedStatement stmt;
         try {
             openConnection();
@@ -69,7 +69,7 @@ public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
 
     @Override
     public void remove(Bank bank) throws DAOException {
-        String sql = "DELETE FROM BANKS WHERE NAME='" + bank.getBankName() + "');";
+        String sql = "DELETE FROM BANKS WHERE BANK_NAME='" + bank.getBankName() + "');";
         PreparedStatement stmt;
         try {
             openConnection();

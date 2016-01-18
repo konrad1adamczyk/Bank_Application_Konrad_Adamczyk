@@ -1,11 +1,11 @@
 package com.luxoft.bankapp.tests;
 
+import com.luxoft.bankapp.database.AccountDAOImpl;
 import com.luxoft.bankapp.database.BankDAOImpl;
-import com.luxoft.bankapp.ecxeptions.ClientExistsException;
-import com.luxoft.bankapp.model.Bank;
-import com.luxoft.bankapp.model.CheckingAccount;
-import com.luxoft.bankapp.model.Client;
-import com.luxoft.bankapp.model.SavingAccount;
+import com.luxoft.bankapp.database.ClientDAOImpl;
+import com.luxoft.bankapp.ecxeptions.*;
+import com.luxoft.bankapp.model.*;
+import com.luxoft.bankapp.service.TestService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,44 +15,40 @@ import static junit.framework.TestCase.assertTrue;
  * Created by KAdamczyk on 2016-01-18.
  */
 public class BankDaoTest {
-    private static Bank bank;
+    Bank bank;
+    private final String bankName = "Testowy";
 
     @Before
-    public static void initBank () throws ClientExistsException {
-        bank = new Bank ("My Bank");
+    public void initBank() throws BankException, DAOException {
+        bank = new Bank(bankName);
+        bank.setId(200);
 
-        Client client = new Client();
-        client.setName ("Ivan Ivanov");
-        client.setCity ("Kiev");
-        client.addAccount (new CheckingAccount());
+        Client client = new Client(50,"Franek Dolas", Gender.MALE, 500f, 500f, "franek@gmail.com", "555333444", "Nowy York",200);
+
+
+        client.addAccount(new SavingAccount());
         bank.addClient(client);
+
     }
 
     @Test
-    public void testInsert () {
-        BankDAOImpl.save (bank);
+    public void test() throws DAOException, BankNotFoundException, BankException {
+        BankDAOImpl bankDao = new BankDAOImpl();
+        ClientDAOImpl clientDao = new ClientDAOImpl();
+        AccountDAOImpl accountDao = new AccountDAOImpl();
+        bankDao.save(bank);
 
-        Bank bank2 = BankDAOImpl.loadBank ();
+        Bank bank2 = bankDao.getBankByName(bankName);
+        for (Client client : clientDao.getAllClients(bank2)) {
+            for (Account account : accountDao.getClientAccounts(client.getId())) {
+                System.out.println(client);
+                client.addAccount(account);
+            }
+            bank2.addClient(client);
+        }
 
-        assertTrue (TestService.compare (bank, bank2));
+        assertTrue(TestService.isEquals(bank, bank2));
     }
-
-
-    @ Test
-    public void testUpdate () {
-        BankDAOImpl.save(bank);
-
-        // Make changes to Bank
-        Client client2 = new Client ();
-        client2.setName ("Ivan Petrov");
-        client2.setCity ("New York");
-        client2.addAccount (new SavingAccount());
-        bank.addClient (new Client ());
-        BankDAOImpl.save (bank);
-
-        Bank bank2 = BankDAOImpl.loadBank ();
-
-        assertTrue (TestService.compare (bank, bank2));
-    }
-
 }
+
+//TestService, TestServiceTest, BankDaoTest

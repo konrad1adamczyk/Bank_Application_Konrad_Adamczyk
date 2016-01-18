@@ -37,60 +37,43 @@ public class Client implements Report, Comparable<Client> , Serializable
 		this.listOfAccounts = new HashSet<Account>(2);
 	}
 
-	public Client(String name)
-	{
-		this.id = counter++;
+	public Client(String name) {
+		this();
 		this.name = name;
-		this.listOfAccounts = new HashSet<Account>(2);
 	}
 
-	public Client(String name, float initialOverdraft)
-	{
-		this.id = counter++;
-		this.name = name;
+	public Client(String name, float initialOverdraft) {
+		this(name);
 		this.initialOverdraft = initialOverdraft;
-		this.listOfAccounts = new HashSet<Account>(2);
 	}
 
-	public Client(String city, Gender gender,String name, float initialOverdraft)
-	{
-		this.id = counter++;
+	public Client(String city, Gender gender,String name, float initialOverdraft) {
+		this(name, initialOverdraft);
 		this.city = city;
 		this.gender = gender;
-		this.name = name;
-		this.initialOverdraft = initialOverdraft;
-		this.listOfAccounts = new HashSet<Account>(2);
 	}
-	public Client(Gender gender,String name, float initialOverdraft)
-	{
-		this.id = counter++;
+
+	public Client(Gender gender,String name, float initialOverdraft) {
+		this(name, initialOverdraft);
 		this.gender = gender;
-		this.name = name;
-		this.initialOverdraft = initialOverdraft;
-		this.listOfAccounts = new HashSet<Account>(2);
 	}
-
-
 
 	public Client(String name, Gender gender,float initialOverdraft,String email, String phone, String city) {
 		this(gender,name,  initialOverdraft);
 		this.email = email;
 		this.phone = phone;
 		this.city = city;
-		this.listOfAccounts = new HashSet<Account>(2);
 	}
-	public Client(int id, String name, Gender gender, float initialOverdraft, float debt, String email, String phone, String city, int bankId) {
+	public Client(String name, Gender gender, float initialOverdraft, float debt, String email, String phone, String city) {
+		this(name, gender, initialOverdraft, email, phone, city);
 
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.initialOverdraft = initialOverdraft;
 		this.debt = debt;
-		this.email = email;
-		this.phone = phone;
-		this.city = city;
+	}
+
+	public Client(int id, String name, Gender gender, float initialOverdraft, float debt, String email, String phone, String city, int bankId) {
+		this(name, gender, initialOverdraft, debt, email, phone, city);
+		this.id = id;
 		this.bankId = bankId;
-		this.listOfAccounts = new HashSet<Account>(2);
 	}
 
 	public String getName()
@@ -98,15 +81,9 @@ public class Client implements Report, Comparable<Client> , Serializable
 		return name;
 	}
 
-
 	public float getInitialOverdraft()
 	{
 		return initialOverdraft;
-	}
-
-	public void setInitialOverdraft(float initialOverdraft)
-	{
-		this.initialOverdraft = initialOverdraft;
 	}
 
 	public Account setActiveAccount(Account activeAccount)
@@ -119,9 +96,6 @@ public class Client implements Report, Comparable<Client> , Serializable
 		return activeAccount;
 	}
 
-
-
-//	************************************************************
 	public void addAccountToClient(Account account){
 		if (account instanceof CheckingAccount) {
 			CheckingAccount checkingAccount = (CheckingAccount) account;
@@ -142,7 +116,6 @@ public class Client implements Report, Comparable<Client> , Serializable
 		if(activeAccount != null) activeAccount.withdraw(amount);
 	}
 
-	//***************************************
 	public Set<Account> getListOfAccounts()
 	{
 		return Collections.unmodifiableSet(listOfAccounts);
@@ -156,14 +129,11 @@ public class Client implements Report, Comparable<Client> , Serializable
 	public String getClientSalutation()
 	{
 		return gender.getClientSalutation();
-//		return "";
 	}
 
 	@Override
 	public void printReport()
 	{
-		// the customer should override method printReport (), which has to
-		// display information about the customer and all of its accounts
 		 System.out.print(getClientSalutation() + " " + name + ", City: " + getCity() + ", E-mail: " + getEmail()
 				 + ", Phone: " + getPhone()+ ", Initial Overdraft: " + getInitialOverdraft()+"\n" );
 		 listOfAccounts.forEach(account -> account.printReport());
@@ -177,16 +147,12 @@ public class Client implements Report, Comparable<Client> , Serializable
 		stringBuilder.append("\n").append(getClientSalutation()).append(" ").append(name).append(", from City: ").append(getCity()).append(", E-mail: ").append(getEmail())
 				.append(", Phone: ").append(getPhone()).append(", have got accounts: ");
 
-//		listOfAccounts.forEach(account -> stringBuilder.append(account.printReport2()));
-
 		for (Account account :listOfAccounts){
 			stringBuilder.append("\n").append(i).append(") ").append(account.printReport2());
 			i++;
 		}
-
 		return stringBuilder.toString();
 	}
-
 
 	public String getEmail() {
 		return email;

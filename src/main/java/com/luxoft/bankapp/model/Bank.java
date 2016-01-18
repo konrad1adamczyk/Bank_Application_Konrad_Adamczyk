@@ -10,14 +10,14 @@ import java.util.*;
 public class Bank implements Report
 {
 	private String bankName;
-	private int id;
+	@NoDB private int id;
 	@NoDB private static int counter = 0;
 
-	public Set<Client> getListOfClients() {
+	@NoDB public Set<Client> getListOfClients() {
 		return Collections.unmodifiableSet(listOfClients);
 	}
 
-	public void setListOfClients(Set<Client> listOfClients) {
+	@NoDB public void setListOfClients(Set<Client> listOfClients) {
 		this.listOfClients = listOfClients;
 	}
 
@@ -27,11 +27,8 @@ public class Bank implements Report
 	@NoDB Set<ClientRegistrationListener> eventListeners = new HashSet<ClientRegistrationListener>();
 
 
-
-	public Bank(String bankName)
-	{
+	public Bank() {
 		this.id = counter++;
-		this.setBankName(bankName);
 		listOfClients = new TreeSet<>();
 
 		class PrintClientListener implements ClientRegistrationListener {
@@ -62,7 +59,12 @@ public class Bank implements Report
 		registerEvent(new PrintClientListener());
 		registerEvent(new EmailNotificationListener());
 		registerEvent(new DebugListener());
+	}
 
+
+	public Bank(String bankName) {
+		this();
+		this.setBankName(bankName);
 	}
 
 	private void registerEvent(ClientRegistrationListener listner) {

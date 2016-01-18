@@ -86,12 +86,12 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
                     "CLIENT_ID='" + client.getId() + "'," +
                     "NAME='" + client.getName() + "'," +
                     "GENDER='" + client.getGender().toSqlString() + "'," +
-                    "Initial_Overdraft=" + client.getInitialOverdraft() +
+                    "Initial_Overdraft=" + client.getInitialOverdraft() +","+
                     "DEBT='" + client.getDebt() + "'," +
                     "EMAIL='" + client.getEmail() + "'," +
                     "PHONE_NUMBER='" + client.getPhone() + "'," +
                     "City='" + client.getCity() + "'," +
-                    "BANK_ID='" + client.getBankId() + "'," +
+                    "BANK_ID='" + client.getBankId() + "'" +
                     "WHERE CLIENT_ID=" + client.getId() + ";";
         }
         else {
