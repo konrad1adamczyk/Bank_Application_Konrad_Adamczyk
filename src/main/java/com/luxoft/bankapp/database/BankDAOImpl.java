@@ -48,17 +48,22 @@ public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
 
     @Override
     public void save(Bank bank) throws DAOException {
-        String sql ="INSERT INTO BANKS (BANK_NAME) VALUES('" + bank.getBankName() +"');";
+        String sql ="INSERT INTO BANKS VALUES("+
+                bank.getId() + "," +
+                "'" + bank.getBankName() +"');";
         PreparedStatement stmt;
         try {
             openConnection();
             stmt = conn.prepareStatement(sql);
+            if(!stmt.execute())
+                System.out.println("Bank saved");
+
             for(Client c : bank.getListOfClients()) {
                 ClientDAOImpl clDaoImpl = new ClientDAOImpl();
                 clDaoImpl.save(c);
             }
-            if(!stmt.execute())
-                System.out.println("Bank saved");
+//            if(!stmt.execute())
+//                System.out.println("Bank saved");
         } catch(SQLException e) {
             throw new DAOException(e.getMessage());
         } finally {

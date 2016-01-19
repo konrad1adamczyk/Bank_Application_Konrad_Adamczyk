@@ -25,10 +25,12 @@ public class BankDaoTest {
         bank = new Bank(bankName);
         bank.setId(200);
         int userId = bank.getNewId();
-        Client client = new Client(userId,"Franek Dolas", Gender.MALE, 500f, 500f, "franek@gmail.com", "555333444", "Nowy York");
+        Client client = new Client(500,"Franek Dolas", Gender.MALE, 500f, 500f, "franek@gmail.com", "555333444", "Nowy York");
 
-        client.setId(userId);
+
         client.setBankId(bank.getId());
+
+
         client.addAccount(new SavingAccount());
         bank.addClient(client);
 
@@ -39,6 +41,7 @@ public class BankDaoTest {
         BankDAOImpl bankDao = new BankDAOImpl();
         ClientDAOImpl clientDao = new ClientDAOImpl();
         AccountDAOImpl accountDao = new AccountDAOImpl();
+        bank.printReport();
         bankDao.save(bank);
 
         Bank bank2 = bankDao.getBankByName(bankName);
