@@ -83,7 +83,7 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
         String sql = "";
         if(clientExistsInDB(client)){
             sql = "UPDATE CLIENTS SET " +
-                    "CLIENT_ID='" + client.getId() + "'," +
+//                    "CLIENT_ID='" + client.getId() + "'," +
                     "NAME='" + client.getName() + "'," +
                     "GENDER='" + client.getGender().toSqlString() + "'," +
                     "Initial_Overdraft=" + client.getInitialOverdraft() +","+

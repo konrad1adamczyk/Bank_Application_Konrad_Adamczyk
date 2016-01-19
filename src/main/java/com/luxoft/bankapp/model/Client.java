@@ -20,13 +20,13 @@ public class Client implements Report, Comparable<Client> , Serializable
 	private static final long serialVersionUID = -314495632608649981L;
 	private String city;
 
-	private Gender gender;
-	private String name;
-	private String email;
-	private String phone;
+	@NoDB private Gender gender;
+	@NoDB private String name;
+	@NoDB private String email;
+	@NoDB private String phone;
 	@NoDB private Set<Account> listOfAccounts = new HashSet<Account>();
 //	private List<Account> listOfAccounts = new ArrayList<Account>();
-	private Account activeAccount;
+	@NoDB private Account activeAccount;
 
 	private float initialOverdraft;
 	private float debt;
@@ -68,6 +68,10 @@ public class Client implements Report, Comparable<Client> , Serializable
 		this(name, gender, initialOverdraft, email, phone, city);
 
 		this.debt = debt;
+	}
+	public Client(int id, String name, Gender gender, float initialOverdraft, float debt, String email, String phone, String city) {
+		this(name, gender, initialOverdraft, debt, email, phone, city);
+		this.id = id;
 	}
 
 	public Client(int id, String name, Gender gender, float initialOverdraft, float debt, String email, String phone, String city, int bankId) {

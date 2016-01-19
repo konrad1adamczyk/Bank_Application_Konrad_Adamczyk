@@ -3,7 +3,9 @@ package com.luxoft.bankapp.tests;
 import com.luxoft.bankapp.database.AccountDAOImpl;
 import com.luxoft.bankapp.database.BankDAOImpl;
 import com.luxoft.bankapp.database.ClientDAOImpl;
-import com.luxoft.bankapp.ecxeptions.*;
+import com.luxoft.bankapp.ecxeptions.BankException;
+import com.luxoft.bankapp.ecxeptions.BankNotFoundException;
+import com.luxoft.bankapp.ecxeptions.DAOException;
 import com.luxoft.bankapp.model.*;
 import com.luxoft.bankapp.service.TestService;
 import org.junit.Before;
@@ -22,10 +24,11 @@ public class BankDaoTest {
     public void initBank() throws BankException, DAOException {
         bank = new Bank(bankName);
         bank.setId(200);
+        int userId = bank.getNewId();
+        Client client = new Client(userId,"Franek Dolas", Gender.MALE, 500f, 500f, "franek@gmail.com", "555333444", "Nowy York");
 
-        Client client = new Client(50,"Franek Dolas", Gender.MALE, 500f, 500f, "franek@gmail.com", "555333444", "Nowy York",200);
-
-
+        client.setId(userId);
+        client.setBankId(bank.getId());
         client.addAccount(new SavingAccount());
         bank.addClient(client);
 
@@ -39,16 +42,15 @@ public class BankDaoTest {
         bankDao.save(bank);
 
         Bank bank2 = bankDao.getBankByName(bankName);
+
         for (Client client : clientDao.getAllClients(bank2)) {
             for (Account account : accountDao.getClientAccounts(client.getId())) {
-                System.out.println(client);
+
                 client.addAccount(account);
             }
+            client.setBankId(bank2.getId());
             bank2.addClient(client);
         }
-
         assertTrue(TestService.isEquals(bank, bank2));
     }
 }
-
-//TestService, TestServiceTest, BankDaoTest
