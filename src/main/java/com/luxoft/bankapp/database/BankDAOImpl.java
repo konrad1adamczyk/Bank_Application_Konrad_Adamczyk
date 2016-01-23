@@ -9,23 +9,23 @@ import com.luxoft.bankapp.network.BankInfo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
  */
 public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
-//    Connection conn;
+
 
     public Bank getBankByName(String name) throws DAOException, BankException {
         Bank bank = new Bank(name);
-//        String sql = "SELECT * FROM BANKS;";
+
 
         String sql = "SELECT * FROM BANKS ;";
         PreparedStatement stmt;
         try {
             openConnection();
             stmt = conn.prepareStatement(sql);
-//            stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int id  = rs.getInt("BANK_ID");
@@ -34,6 +34,7 @@ public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
                 throw new BankException(name);
             }
         } catch (SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             e.printStackTrace();
             throw new DAOException();
         } catch (BankException e) {
@@ -56,15 +57,17 @@ public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Bank saved");
+                databaseLog.log(Level.INFO, "Bank " + bank.getBankName() + " saved");
+//                System.out.println("Bank saved");
 
             for(Client c : bank.getListOfClients()) {
                 ClientDAOImpl clDaoImpl = new ClientDAOImpl();
                 clDaoImpl.save(c);
             }
-//            if(!stmt.execute())
-//                System.out.println("Bank saved");
+
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
+            e.printStackTrace();
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -80,8 +83,11 @@ public class BankDAOImpl extends BaseDaoImpl implements BankDAO  {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Bank deleted");
+                databaseLog.log(Level.INFO, "Bank " + bank.getBankName() + " deleted");
+//                System.out.println("Bank deleted");
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
+            e.printStackTrace();
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();

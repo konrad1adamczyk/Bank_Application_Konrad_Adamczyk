@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
@@ -36,11 +37,13 @@ public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Account saved");
+                databaseLog.log(Level.INFO, "Account with id = " + account.getId() + " saved");
+//                System.out.println("Account saved");
             else
-                System.err.println("Problems during save");
+                databaseLog.log(Level.INFO, "Problems during save");
+//                System.err.println("Problems during save");
         } catch(SQLException e) {
-
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -64,8 +67,10 @@ public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Account added");
+                databaseLog.log(Level.INFO, "Account with id = " + account.getId() + " added");
+//                System.out.println("Account added");
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -80,8 +85,10 @@ public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Accounts removed");
+                databaseLog.log(Level.INFO, "Accounts for client with id = " + idClient + " removed");
+//                System.out.println("Accounts removed");
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -127,10 +134,12 @@ public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
                     accountsList.add(account);
                 }
                 else {
-                    System.err.println("wrong account type " + typeOfAccount);
+                    databaseLog.log(Level.INFO, "wrong account type " + typeOfAccount);
+//                    System.err.println("wrong account type " + typeOfAccount);
                 }
             }
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();

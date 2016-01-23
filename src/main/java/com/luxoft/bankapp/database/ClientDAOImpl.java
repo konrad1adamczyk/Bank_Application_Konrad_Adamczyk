@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
 
 /**
  * Created by KAdamczyk on 2016-01-13.
@@ -37,6 +38,7 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
                 return new Client(id, clientName, gender,initialOverdraft, debt, email, phone, city, bankId);
             }
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -71,6 +73,7 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
                 clientsList.add(client);
             }
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -111,8 +114,10 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Client saved");
+                databaseLog.log(Level.INFO, "Client: " + client.getName() + " saved");
+//                System.out.println("Client saved");
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -128,8 +133,10 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
             openConnection();
             stmt = conn.prepareStatement(sql);
             if(!stmt.execute())
-                System.out.println("Client removed");
+                databaseLog.log(Level.INFO, "Client: " + client.getName() + " removed");
+//                System.out.println("Client removed");
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
@@ -147,6 +154,7 @@ public class ClientDAOImpl extends BaseDaoImpl implements ClientDAO {
                 return true;
             }
         } catch(SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
             throw new DAOException(e.getMessage());
         } finally {
             closeConnection();
