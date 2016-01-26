@@ -5,8 +5,14 @@ Deny from all
 </FilesMatch>
 
 RewriteEngine on
-RewriteRule zatrudnij-programiste-webowego index.html
-RewriteRule kim-jestem kimjestem.html
-RewriteRule oferta-tworzenie-stron-www oferta.html
-RewriteRule cv-programista-php-javascript cv.html
-RewriteRule kontakt-programista-php kontakt.html
+RewriteRule bank-application index.html
+RewriteRule add-account addAccount.html
+RewriteRule add-new-client addNewClient.html
+RewriteRule deposit-money deposit.html
+RewriteRule information-about-bank informationAboutBank.html
+RewriteRule clients-panel logedin.html
+RewriteRule remove-account removeAccount.html
+RewriteRule remove-client removeClient.html
+RewriteRule set-active-account setActiveAccount.html
+RewriteRule transfer-money transfer.html
+RewriteRule withdraw-money withdraw.html
