@@ -1,0 +1,202 @@
+body
+{
+	background-color: #303030;
+	color: #ffffff;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+}
+
+#container
+{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.rectangle
+{
+	width: 960px;
+	margin: 20px;
+	text-align: right;
+}
+
+.square
+{
+	text-align: center;
+	width: 50%;
+	float: left;
+}
+
+#logo
+{
+	float: left;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 55px;
+	width: 720px;
+	text-align: left;
+}
+
+#zegar
+{
+	float: left;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 60px;
+	width: 220px;
+
+	text-align: left;
+}
+
+.tile1
+{
+	margin: 10px;
+	width: 230px;
+	height: 142px;
+	background-color: #3095d3;
+	float: left;
+	text-align: center;
+}
+
+.tile1:hover
+{
+	background-color: #2084c2;
+}
+
+.tile2
+{
+	margin: 10px;
+	width: 230px;
+	height: 142px;
+	background-color: #666666;
+	float: left;
+	text-align: center;
+}
+
+.tile2:hover
+{
+	background-color: #555555;
+}
+
+.tile3
+{
+	margin: 10px;
+	width: 230px;
+	height: 142px;
+	background-color: #93c748;
+	float: left;
+	text-align: center;
+}
+
+.tile3:hover
+{
+	background-color: #82b637;
+}
+
+.tile4
+{
+	margin: 10px;
+	width: 420px;
+	height: 82px;
+	background-color: #ee5a32;
+	text-align: center;
+	font-size: 26px;
+	padding: 30px;
+	line-height: 150%;
+}
+
+.tile5
+{
+	margin: 10px;
+	width: 420px;
+	height: 244px;
+	background-color: #666666;
+	text-align: justify;
+	padding: 30px;
+}
+
+.deposit
+{
+	margin: 10px;
+	width: 105px;
+	height: 142px;
+	background-color: #d94348;
+	float: left;
+}
+
+.deposit:hover
+{
+	background-color: #c83237;
+}
+
+.withdraw
+{
+	margin: 10px;
+	width: 105px;
+	height: 142px;
+	background-color: #4668b3;
+	float: left;
+}
+
+.withdraw:hover
+{
+	background-color: #3557a2;
+}
+
+.transfer
+{
+	margin: 10px;
+	width: 105px;
+	height: 142px;
+	background-color: #d95333;
+	float: left;
+}
+
+.transfer:hover
+{
+	background-color: #c84222;
+}
+
+.something
+{
+	margin: 10px;
+	width: 105px;
+	height: 142px;
+	background-color: #3095d3;
+	float: left;
+}
+
+.something:hover
+{
+	background-color: #2084c2;
+}
+
+a.tilelink
+{
+	color: #ffffff;
+	text-decoration: none;
+	display: block;
+	width: 230px;
+	height: 142px;
+}
+
+a.tilelinkhtml5
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+a.operationlink
+{
+	color: #ffffff;
+	text-decoration: none;
+	display: block;
+	width: 105px;
+	height: 142px;
+}
+
+.rectangle2
+{
+	width: 960px;
+	margin: 20px;
+	text-align: center;
+	font-size: 12px;
+}
