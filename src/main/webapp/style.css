@@ -204,6 +204,12 @@ a.tilelink
 	height: 142px;
 }
 
+a.tilelink2
+{
+	color: black;
+	text-decoration: none;
+}
+
 a.tilelinkhtml5
 {
 	color: #ffffff;
