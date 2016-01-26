@@ -113,18 +113,34 @@ body
 	padding: 30px;
 }
 
+.tile6
+{
+
+	margin: 10px;
+	width: 230px;
+	height: 142px;
+	background-color: #d94348;
+	float: left;
+	text-align: center;
+}
+
+.tile6:hover
+{
+	background-color: #c83237;
+}
+
 .deposit
 {
 	margin: 10px;
 	width: 105px;
 	height: 142px;
-	background-color: #d94348;
+	background-color: #93c748;
 	float: left;
 }
 
 .deposit:hover
 {
-	background-color: #c83237;
+	background-color: #82b637;
 }
 
 .withdraw
