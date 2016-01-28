@@ -12,11 +12,11 @@ public class LoginServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException{
         final String clientName = request.getParameter("clientName");
         if (clientName == null) {
-            logger.warn("Client not fount");
+//            logger.warn("Client not fount");
             throw new ServletException("No client specified.");
         }
         request.getSession().setAttribute("clientName",clientName);
-        logger.info("Client" + clientName + "logger into ATM");
+//        logger.info("Client" + clientName + "logger into ATM");
 
         response.sendRedirect("menu.html");
     }
