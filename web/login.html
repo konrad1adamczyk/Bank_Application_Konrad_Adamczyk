@@ -12,6 +12,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
     <script src="timer.js"></script>
+    <script type="text/javascript" src="validation.js"></script>
 
 </head>
 
@@ -49,69 +50,13 @@
     </div>
     <div class="square">
         <div class="tile5a">
-            <form action="form" method="POST" target="_blank">
-                <table>
-                    <tr><td colspan=2 >To login to our bank <br />please, fill the form:</td></tr>
-                    <!--<tr>
-                        <td>Email:</td>
-                        <td>
-                            <input type="text" name="email"/>
-                        </td>
-                    </tr>-->
-                    <tr>
-                    <td>Client name:</td>
-                    <td>
-                        <form action="/login" method="post">
-                            <input type="text" name="clientName">
-                        </form>
-                        <!--<input type="text" name="name"/>-->
-                    </td>
-                </tr>
-                <!--<tr>
-                    <td>Password:</td>
-                    <td><input type="text" name="password"/></td>
-                </tr>-->
-                </table>
 
-                <button onclick>
-                    <a href="logedin.html" class="tilelink2"> Submit  </a>
-                </button>
-            </form>
-
-            <script>
-                function checkForm() {
-                    var form = $("#form"); // find form by id
-                    var email = $("#email").val();
-                    var checkResult = true;
-                    if (!email.match(".+@.+\.[a-zA-Z]{2,3}")) {
-                        $("#emailError").html("wrong e-mail format");
-                        checkResult=false;
-                    }
-                    var name=$("#name").val();
-                    if (name.length<2) {
-                        $("#nameError").html("please specify your name");
-                    }
-                    if (checkResult) {
-                        alert("All correct, sending...");
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            </script>
-            <style>
-                .error {
-                    color:red;
-                    font-style: italic;
-                }
-            </style>
-
-            <form id="form" action="/login" method="post" target="_blank">
+            <form id="form" action="/login" method="POST" target="_self">
                 <table>
                     <tr><td colspan=2 style="font-weight:bold;"></br>Please, fill the form:</td></tr>
 
                     <td>Name:</td>
-                    <td><input type="text" name="name" id="name"/></td>
+                    <td><input type="text" name="clientName" id="name"/></td>
                     <td id="nameError" class="error"></td>
 
                 </tr><tr><td>
