@@ -20,7 +20,7 @@
 	<div id="container">
 
 		<div class="rectangle">
-			<div id="logo"><a href="index.html" class="tilelinkhtml5">Bank Application</a></div>
+			<div id="logo"><a href="index.jsp" class="tilelinkhtml5">Bank Application</a></div>
 			<div id="zegar">     12:00:00</div>
 			<div style="clear: both;"></div>
 		</div>
