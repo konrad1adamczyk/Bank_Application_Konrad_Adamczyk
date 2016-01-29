@@ -12,22 +12,23 @@ import java.util.logging.Logger;
 /**
  * Created by KAdamczyk on 2016-01-28.
  */
-public class LoginServlet  extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     Logger logger = Logger.getLogger("clients." + this.getClass().getName());
 
-    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException{
+    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 
 
         final String clientName = request.getParameter("clientName");
-        System.out.println(clientName  + " ***************************************************************************");
+        System.out.println(clientName + " ***************************************************************************");
         if (clientName == null) {
             logger.warning("Client not found");
             throw new ServletException("No client specified.");
         }
-        request.getSession().setAttribute("clientName",clientName);
-        logger.info("Client " + clientName + " logged into ATM");
+        request.getSession().setAttribute("clientName", clientName);
 
-        response.sendRedirect("logedin.html");
+                logger.info("Client " + clientName + " logged into ATM");
+
+        response.sendRedirect("logedin.jsp");
     }
 
 }

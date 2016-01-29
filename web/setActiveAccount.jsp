@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
-	<title>Transfer</title>
+	<title>Set Active Account</title>
 
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
@@ -20,7 +20,7 @@
 	<div id="container">
 	
 		<div class="rectangle">
-			<div id="logo"><a href="zatrudnij-programiste-webowego" class="tilelinkhtml5">Welcome Konrad Adamczyk</a></div>
+			<div id="logo" class="tilelinkhtml5">Logged Client: <%=session.getAttribute("clientName")%></div>
 			<div id="zegar">     12:00:00</div>
 			<div style="clear: both;"></div>
 		</div>
@@ -31,16 +31,16 @@
 			</div>
 
 			<div class="tile1">
-				<a href="setActiveAccount.html" class="tilelink"><i class="icon-ok-squared"></i><br />Set Active Account</a>
+				<a href="setActiveAccount.jsp" class="tilelink"><i class="icon-ok-squared"></i><br />Set Active Account</a>
 			</div>
 
 			<div style="clear:both;"></div>
-
+			
 			<div class="tile3">
-				<a href="addAccount.html" class="tilelink"><i class="icon-plus-squared"></i><br />Add Account</a>
+				<a href="addAccount.jsp" class="tilelink"><i class="icon-plus-squared"></i><br />Add Account</a>
 			</div>
 			<div class="tile6">
-				<a href="removeAccount.html" class="tilelink"><i class="icon-minus-squared"></i><br />Remove Account</a>
+				<a href="removeAccount.jsp" class="tilelink"><i class="icon-minus-squared"></i><br />Remove Account</a>
 			</div>
 			<div style="clear:both;"></div>
 			
@@ -50,17 +50,17 @@
 		</div>
 		<div class="square">
 			<div class="tile5">
-				Transfer <br /><br />
+				Set Active Account<br /><br />
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pulvinar ipsum mauris, ac elementum felis convallis non. Duis aliquam felis vel dignissim tincidunt. In tellus mauris, tempor rutrum blandit in, efficitur ac quam. Mauris eu orci scelerisque, placerat eros id, condimentum justo. Suspendisse ac mattis orci, at mollis orci. 
 			</div>
 			<div class="deposit">
-				<a href="deposite.html" class="operationlink"><i class="icon-download-outline"></i><br />Deposit</a>
+				<a href="deposite.jsp" class="operationlink"><i class="icon-download-outline"></i><br />Deposit</a>
 			</div>
 			<div class="withdraw">
-				<a href="withdraw.html" class="operationlink"><i class=" icon-upload-outline"></i><br />Withdraw</a>
+				<a href="withdraw.jsp" class="operationlink"><i class=" icon-upload-outline"></i><br />Withdraw</a>
 			</div>
 			<div class="transfer">
-				<a href="transfer.html" class="operationlink"><i class=" icon-export"></i><br />Transfer</a>
+				<a href="transfer.jsp" class="operationlink"><i class=" icon-export"></i><br />Transfer</a>
 			</div>
 			<div class="something">
 				<a href="http://google.com" class="operationlink"><i class=" icon-money"></i><br />Something</a>
