@@ -22,7 +22,10 @@ public class CheckLoggedFilter implements Filter {
         String path = ((HttpServletRequest) req).getRequestURI();
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        if (path.startsWith("/login")  || path.startsWith("/index") || path.equals("/") ||  clientName != null) {
+        if (path.startsWith("/login")|| path.startsWith("/validation.js")|| path.startsWith("/css/fontello.css")
+                || path.startsWith("/timer.js") || path.startsWith("/font/fontello.woff")
+
+                || path.startsWith("/style.css") || path.startsWith("/index") || path.equals("/") ||  clientName != null) {
             chain.doFilter(req, resp);
         } else {
             response.sendRedirect("/login.html");

@@ -20,25 +20,25 @@
 	<div id="container">
 
 		<div class="rectangle">
-			<div id="logo"><a href="index.html" class="tilelinkhtml5">Bank Application</a></div>
+			<div id="logo"><a href="index.jsp" class="tilelinkhtml5">Bank Application</a></div>
 			<div id="zegar">     12:00:00</div>
 			<div style="clear: both;"></div>
 		</div>
 
 		<div class="square">
 			<div class="tile1">
-				<a href="logedin.html" class="tilelink" ><i class="icon-user"></i><br />Log In</a>
+				<a href="logedin.sjp" class="tilelink" ><i class="icon-user"></i><br />Log In</a>
 			</div>
 			<div class="tile1">
-				<a href="addNewClient.html" class="tilelink" ><i class="icon-user-plus"></i><br />Add New Client</a>
+				<a href="addNewClient.jsp" class="tilelink" ><i class="icon-user-plus"></i><br />Add New Client</a>
 			</div>
 			<div style="clear:both;"></div>
 
 			<div class="tile2">
-				<a href="removeClient.html" class="tilelink"><i class="icon-user-times"></i><br />Remove Client</a>
+				<a href="removeClient.jsp" class="tilelink"><i class="icon-user-times"></i><br />Remove Client</a>
 			</div>
 			<div class="tile3">
-				<a href="informationAboutBank.html" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>
+				<a href="informationAboutBank.jsp" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>
 			</div>
 			<div style="clear:both;"></div>
 
@@ -63,7 +63,7 @@
 					</tr>
 					</table>
 
-					<button onclick>  <a href="logedin.html" class="tilelink2"> Submit  </a>  </button>
+					<button onclick>  <a href="logedin.jsp" class="tilelink2"> Submit  </a>  </button>
 				</form>
 
 			</div>
