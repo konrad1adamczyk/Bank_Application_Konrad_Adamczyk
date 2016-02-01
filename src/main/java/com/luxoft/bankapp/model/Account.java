@@ -23,6 +23,7 @@ public interface Account extends Report{
 	public int getClientId();
 	public void setClientId(int clientId);
 	public float getOverdraft();
+	public void setAccountNumber();
 
 
 }

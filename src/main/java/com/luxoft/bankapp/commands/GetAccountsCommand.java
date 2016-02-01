@@ -13,8 +13,8 @@ public class GetAccountsCommand implements  Command {
 
     @Override
     public void execute() {
-        if (currentClient != null) {
-            if (currentClient.getActiveAccount() != null){
+        if (BankCommander.currentClient != null) {
+            if (currentClient.getListOfAccounts() != null){
                 currentClient.printReport();
             } else {
                 System.out.println("No accounts.");

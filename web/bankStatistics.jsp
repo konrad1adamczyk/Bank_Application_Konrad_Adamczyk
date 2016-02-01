@@ -38,7 +38,7 @@
 				<a href="removeClient.jsp" class="tilelink"><i class="icon-user-times"></i><br />Remove Client</a>
 			</div>
 			<div class="tile3">
-				<a href="informationAboutBank.jsp" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>
+				<a href="bankStatistics.jsp" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>
 			</div>
 			<div style="clear:both;"></div>
 
@@ -48,37 +48,13 @@
 		</div>
 		<div class="square">
 			<div class="tile5a">
-				<table border="1">
-					<tr>
-						<th colspan=2 style="font-weight:bold;">Bank Statistics for MyBank</th>
-					</tr>
-					<tr>
-						<td colspan=2 >Overall amount of<br />our clients:  </td>
-						<td colspan=2 >54</td>
-					</tr>
-					<tr>
-						<td colspan=2 >Overall sum on the<br />clients accounts:  </td>
-						<td colspan=2 >54456541354$</td>
-					</tr>
-				</table>
-				<br />
-				<table border="1">
-					<tr>
-						<td colspan=2 style="font-weight:bold;">List of Clients by city: </td>
-					</tr>
-					<tr>
-						<td colspan=2 >New York</td>
-						<td colspan=2 >John Smith<br />John Smith</td>
-					</tr>
-					<tr>
-						<td colspan=2 >London</td>
-						<td colspan=2 >Mary Crafford<br />John Smith</td>
-					</tr>
-					<tr>
-						<td colspan=2 >Rome</td>
-						<td colspan=2 >Giovanni Balducci<br />John Smith</td>
-					</tr>
-				</table>
+				<form id="form" action="${pageContext.request.contextPath}/bankStatistics" method="POST" target="_self">
+					Statistics of the bank: <%= session.getAttribute("bankName")%>:<br><br>
+					Overall amount of bank clients: <%= session.getAttribute("numberOfClients")%><br>
+					Overall sum on the clients accounts: <%= session.getAttribute("sumOfBalance")%><br><br>
+					Clients by city:<br>
+					<%= session.getAttribute("clientsByCity")%>
+				</form>
 			</div>
 		</div>
 		<div style="clear: both;"></div>

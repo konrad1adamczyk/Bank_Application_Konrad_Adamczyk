@@ -1,5 +1,7 @@
 package com.luxoft.bankapp.commands;
 
+import com.luxoft.bankapp.database.AccountDAOImpl;
+import com.luxoft.bankapp.ecxeptions.DAOException;
 import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.CheckingAccount;
 import com.luxoft.bankapp.model.SavingAccount;
@@ -24,9 +26,19 @@ public class OpenAccountCommand implements Command {
                     case 1: account = new CheckingAccount(balance); break;
                 }
 
+                account.setClientId(BankCommander.currentClient.getId());
+                account.setId(BankCommander.currentBank.getNewId());
+                account.setAccountNumber();
+
                 BankCommander.currentClient.addAccountToClient(account);
+
+                AccountDAOImpl accountDAO = new AccountDAOImpl();
+                accountDAO.add(account);
+
                 System.out.println("Account has been added.");
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         } else {

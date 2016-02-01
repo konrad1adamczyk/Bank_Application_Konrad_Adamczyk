@@ -39,7 +39,7 @@
             <a href="removeClient.jsp" class="tilelink"><i class="icon-user-times"></i><br />Remove Client</a>
         </div>
         <div class="tile3">
-            <a href="informationAboutBank.jsp" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>
+            <a href="${pageContext.request.contextPath}/bankStatistics" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>
         </div>
         <div style="clear:both;"></div>
 

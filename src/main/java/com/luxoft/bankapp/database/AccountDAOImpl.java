@@ -54,13 +54,13 @@ public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
     public void add(Account account) throws DAOException {
         String sql = "";
 
-        sql = "INSERT INTO ACCOUNTS VALUES (" +
-                account.getId() + "," +
+        sql = "INSERT INTO ACCOUNTS(CLIENT_ID, TYPE_OF_ACCOUNT, BALANCE, OVERDRAFT, ACCOUNT_NUMBER ) VALUES (" +
+
                 account.getClientId() + "," +
                 "'" + account.getAccountType() + "'," +
                 + account.getBalance() + "," +
                 + account.getOverdraft() + "," +
-                "'" + account.getAccountNumber() + ");";
+                "'" + account.getAccountNumber() + "');";
 
         PreparedStatement stmt;
         try {
@@ -145,5 +145,44 @@ public class AccountDAOImpl extends BaseDaoImpl implements AccountDAO {
             closeConnection();
         }
         return accountsList;
+    }
+
+    @Override
+    public Account getAccountById(int accountId, int clientId) throws DAOException {
+        String sql = "SELECT * FROM ACCOUNTS WHERE ID = ?";
+        PreparedStatement stmt;
+        Account acc = null;
+        try {
+            openConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, accountId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Float balance = rs.getFloat("BALANCE");
+                Float overdraft = rs.getFloat("INITIAL_OVERDRAFT");
+
+                if (rs.getString("TYPE").equalsIgnoreCase("s")) {
+                    SavingAccount account = new SavingAccount();
+                    account.setBalance(balance);
+                    account.setClientId(clientId);
+                    account.setId(accountId);
+                    acc = account;
+                } else if (rs.getString("TYPE").equalsIgnoreCase("c")) {
+                    CheckingAccount account = new CheckingAccount();
+                    account.setBalance(balance);
+                    account.setOverdraft(overdraft);
+                    account.setClientId(clientId);
+                    account.setId(accountId);
+                    acc = account;
+                }
+            }
+        } catch (SQLException e) {
+            exceptionLog.log(Level.SEVERE, e.getMessage(), e);
+            e.printStackTrace();
+            throw new DAOException();
+        } finally {
+            closeConnection();
+        }
+        return acc;
     }
 }

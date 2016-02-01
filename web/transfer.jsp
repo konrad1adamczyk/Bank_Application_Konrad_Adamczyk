@@ -27,7 +27,7 @@
 		
 		<div class="square">
 			<div class="tile1">
-				<a href="index.jsp" class="tilelink"><i class="icon-logout"></i><br />Log Out</a>
+				<a href="/logout" class="tilelink" action="/logout"><i class="icon-logout"></i><br />Log Out</a>
 			</div>
 
 			<div class="tile1">

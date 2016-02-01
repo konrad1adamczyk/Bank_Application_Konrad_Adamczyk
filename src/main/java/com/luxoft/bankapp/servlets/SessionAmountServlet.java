@@ -12,7 +12,6 @@ import java.util.logging.Logger;
  * Created by Konrad on 28.01.2016.
  */
 public class SessionAmountServlet extends HttpServlet {
-    Logger logger = Logger.getLogger("clients." + this.getClass().getName());
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {

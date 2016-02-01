@@ -23,6 +23,7 @@ public abstract class AbstractAccount implements Account, Serializable
 	AbstractAccount() {
 		balance = 0;
 		id = counter++;
+		this.setAccountNumber();
 	}
 
 	AbstractAccount(float balance)
@@ -119,7 +120,7 @@ public abstract class AbstractAccount implements Account, Serializable
 	public void printReport()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("This ").append(this.toString()).append(" with account number: ").append(getAccountNumber());
+		sb.append("This ").append(this.toString()).append(" with account number: ").append(getAccountNumber()).append(" and ID number : ").append(getId());
 		System.out.println(sb);
 	}
 

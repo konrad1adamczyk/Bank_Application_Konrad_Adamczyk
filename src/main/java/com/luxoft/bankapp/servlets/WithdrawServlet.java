@@ -3,6 +3,7 @@ package com.luxoft.bankapp.servlets;
 import com.luxoft.bankapp.database.AccountDAOImpl;
 import com.luxoft.bankapp.database.BankDAOImpl;
 import com.luxoft.bankapp.database.ClientDAOImpl;
+import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.BankNotFoundException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
 import com.luxoft.bankapp.ecxeptions.NotEnoughFundsException;
@@ -32,21 +33,23 @@ public class WithdrawServlet {
             ClientDAOImpl clientDAO = new ClientDAOImpl();
             AccountDAOImpl accountDAO = new AccountDAOImpl();
 
-//            try {
-//                Bank bank = bankDAO.getBankByName("MY BANK");
-//                Client client = clientDAO.findClientByName(bank, clientName);
-//                Account account = accountDAO.getAccountById(accountId, client.getId());
-//
-//                account.withdraw(amount);
-//                accountDAO.save(account);
-//
-//                request.getSession().setAttribute("activeAccount", account);
-//                request.getRequestDispatcher("/index1.jsp").forward(request, response);
-//            } catch (DAOException | BankNotFoundException | NotEnoughFundsException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Bank bank = bankDAO.getBankByName("MY BANK");
+                Client client = clientDAO.findClientByName(bank, clientName);
+                Account account = accountDAO.getAccountById(accountId, client.getId());
+
+                account.withdraw(amount);
+                accountDAO.save(account);
+
+                request.getSession().setAttribute("activeAccount", account);
+                request.getRequestDispatcher("/logedin.jsp").forward(request, response);
+            } catch (DAOException | NotEnoughFundsException e) {
+                e.printStackTrace();
+            } catch (BankException e) {
+                e.printStackTrace();
+            }
         } else {
-            response.sendRedirect("/changeAccount");
+            response.sendRedirect("/setActiveAccount");
         }
     }
 }

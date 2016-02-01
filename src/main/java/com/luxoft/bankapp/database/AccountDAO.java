@@ -14,4 +14,6 @@ public interface AccountDAO {
     public void add(Account account) throws DAOException;
     public void removeByClientId(int idClient) throws DAOException;
     public Set<Account> getClientAccounts(int idClient) throws DAOException;
+    Account getAccountById(int id, int clientId) throws DAOException;
+
 }

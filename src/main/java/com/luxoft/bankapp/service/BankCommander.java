@@ -112,9 +112,11 @@ public class BankCommander {
 
         for (Client client : listOfClients){
             client.setListOfAccounts(accountDAO.getClientAccounts(client.getId()));
+
+            client.printReport();
         }
 
-        currentBank.printReport();
+//        currentBank.printReport();
 
 
 

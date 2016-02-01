@@ -51,8 +51,8 @@
 		</div>
 		<div class="square">
 			<div class="tile5">
-				Welcome <%=session.getAttribute("clientName")%> to bank application!<br><br>
-				You have been logged into bank application.
+				Welcome <%=session.getAttribute("clientInfo")%>
+
 			</div>
 			<div class="deposit">
 				<a href="deposite.jsp" class="operationlink"><i class="icon-download-outline"></i><br />Deposit</a>

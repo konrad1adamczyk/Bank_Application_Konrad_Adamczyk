@@ -57,6 +57,33 @@ public class BankReport {
 
     }
 
+    public static String getClientsByCityToString(Bank bank) {
+        Map<String, List<Client>> clientsCityMap = new HashMap<>();
+
+
+        for (Client client : bank.getListOfClients()) {
+            String cityOfClient = client.getCity();
+            List<Client> newList = clientsCityMap.get(cityOfClient);
+            if( newList == null ){
+                newList = new ArrayList<>();
+                clientsCityMap.put(cityOfClient , newList);
+            }
+            newList.add(client);
+        }
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<String, List<Client>> entry : clientsCityMap.entrySet()) {
+            stringBuilder.append(entry.getKey()).append(": ");
+            for (Client client : entry.getValue()) {
+                stringBuilder.append(client.getName()).append(", ");
+            }
+            stringBuilder.append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
     public static void getFullReport(Bank bank) {
         bank.printReport();
         getClientsSorted(bank);

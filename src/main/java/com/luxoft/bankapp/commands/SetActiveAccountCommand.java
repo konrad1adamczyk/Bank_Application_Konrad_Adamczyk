@@ -12,8 +12,7 @@ import java.util.Set;
 public class SetActiveAccountCommand implements Command {
     @Override
     public void execute() {
-        if (BankCommander.currentClient != null &&
-                BankCommander.currentClient.getActiveAccount() != null) {
+        if (BankCommander.currentClient != null && BankCommander.currentClient.getListOfAccounts() != null) {
             try {
                 Set<Account> accounts = BankCommander.currentClient.getListOfAccounts();
                 Account activeAccount = UserInterface.getActiveAccount(accounts);
