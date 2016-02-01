@@ -28,15 +28,15 @@ public class BalanceServlet  extends HttpServlet {
             ClientDAOImpl clientDAO = new ClientDAOImpl();
             AccountDAOImpl accountDAO = new AccountDAOImpl();
             Bank bank = null;
-            try {
-                bank = bankDAO.getBankByName("MY BANK");
-                Client client = clientDAO.findClientByName(bank, clientName);
-                Account account = accountDAO.getAccountById(accountId, client.getId());
-
-                request.getSession().setAttribute("balance", account.getBalance());
-            } catch (DAOException | BankNotFoundException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                bank = bankDAO.getBankByName("MY BANK");
+//                Client client = clientDAO.findClientByName(bank, clientName);
+//                Account account = accountDAO.getAccountById(accountId, client.getId());
+//
+//                request.getSession().setAttribute("balance", account.getBalance());
+//            } catch (DAOException | BankNotFoundException e) {
+//                e.printStackTrace();
+//            }
             request.getRequestDispatcher("/balance.jsp").forward(request, response);
         } else {
             response.sendRedirect("/changeAccount");

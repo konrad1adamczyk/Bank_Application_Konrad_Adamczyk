@@ -32,19 +32,19 @@ public class WithdrawServlet {
             ClientDAOImpl clientDAO = new ClientDAOImpl();
             AccountDAOImpl accountDAO = new AccountDAOImpl();
 
-            try {
-                Bank bank = bankDAO.getBankByName("MY BANK");
-                Client client = clientDAO.findClientByName(bank, clientName);
-                Account account = accountDAO.getAccountById(accountId, client.getId());
-
-                account.withdraw(amount);
-                accountDAO.save(account);
-
-                request.getSession().setAttribute("activeAccount", account);
-                request.getRequestDispatcher("/index1.jsp").forward(request, response);
-            } catch (DAOException | BankNotFoundException | NotEnoughFundsException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Bank bank = bankDAO.getBankByName("MY BANK");
+//                Client client = clientDAO.findClientByName(bank, clientName);
+//                Account account = accountDAO.getAccountById(accountId, client.getId());
+//
+//                account.withdraw(amount);
+//                accountDAO.save(account);
+//
+//                request.getSession().setAttribute("activeAccount", account);
+//                request.getRequestDispatcher("/index1.jsp").forward(request, response);
+//            } catch (DAOException | BankNotFoundException | NotEnoughFundsException e) {
+//                e.printStackTrace();
+//            }
         } else {
             response.sendRedirect("/changeAccount");
         }

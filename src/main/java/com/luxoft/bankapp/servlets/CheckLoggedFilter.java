@@ -28,7 +28,7 @@ public class CheckLoggedFilter implements Filter {
                 || path.startsWith("/style.css") || path.startsWith("/index") || path.equals("/") ||  clientName != null) {
             chain.doFilter(req, resp);
         } else {
-            response.sendRedirect("/login.html");
+            response.sendRedirect("/login.jsp");
         }
     }
     @Override

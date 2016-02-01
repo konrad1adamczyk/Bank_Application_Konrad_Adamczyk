@@ -27,7 +27,7 @@
 		
 		<div class="square">
 			<div class="tile1">
-				<a href="login.html" class="tilelink" ><i class="icon-user"></i><br />Log In</a>
+				<a href="login.jsp" class="tilelink" ><i class="icon-user"></i><br />Log In</a>
 			</div>
 			<div class="tile1">
 				<a href="addNewClient.jsp" class="tilelink" ><i class="icon-user-plus"></i><br />Add New Client</a>
