@@ -25,7 +25,7 @@ public class CheckLoggedFilter implements Filter {
         if (path.startsWith("/login")|| path.startsWith("/validation.js")|| path.startsWith("/css/fontello.css")
                 || path.startsWith("/timer.js") || path.startsWith("/font/fontello.woff")
                 || path.startsWith("/bankStatistics.jsp") || path.startsWith("/removeClient.jsp")
-                || path.startsWith("/bankStatistics")
+                || path.startsWith("/bankStatistics") || path.startsWith("/addNewClient.jsp") || path.startsWith("/addNewClient")
                 || path.startsWith("/style.css") || path.startsWith("/index") || path.equals("/") ||  clientName != null) {
             chain.doFilter(req, resp);
         } else {

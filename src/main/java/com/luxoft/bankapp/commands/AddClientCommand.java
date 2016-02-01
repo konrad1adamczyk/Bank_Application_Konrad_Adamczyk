@@ -19,6 +19,7 @@ public class AddClientCommand implements Command {
     public void execute() {
 
         try {
+
             int userId = BankCommander.currentBank.getNewId();
             String name = UserInterface.getFullName();
 

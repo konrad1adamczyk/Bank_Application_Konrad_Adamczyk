@@ -31,12 +31,12 @@
             <a href="login.jsp" class="tilelink" ><i class="icon-user"></i><br />Log In</a>
         </div>
         <div class="tile1">
-            <a href="addNewClient.jsp" class="tilelink" ><i class="icon-user-plus"></i><br />Add New Client</a>
+            <a href="${pageContext.request.contextPath}/addNewClient.jsp" class="tilelink" ><i class="icon-user-plus"></i><br />Add New Client</a>
         </div>
         <div style="clear:both;"></div>
 
         <div class="tile2">
-            <a href="removeClient.jsp" class="tilelink"><i class="icon-user-times"></i><br />Remove Client</a>
+            <a href="${pageContext.request.contextPath}/removeClient.jsp" class="tilelink"><i class="icon-user-times"></i><br />Remove Client</a>
         </div>
         <div class="tile3">
             <a href="${pageContext.request.contextPath}/bankStatistics" class="tilelink"><i class="icon-bank"></i><br />Inforamtion about Bank</a>

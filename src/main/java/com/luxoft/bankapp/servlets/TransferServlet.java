@@ -16,42 +16,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
- * Created by Konrad on 31.01.2016.
+ * Created by Konrad on 01.02.2016.
  */
-public class WithdrawServlet extends HttpServlet {
-
-
-
+public class TransferServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         final String clientName = (String) request.getSession().getAttribute("clientName");
+        final String transferClientName = request.getParameter("transferName");
         final Integer accountId = (Integer) request.getSession().getAttribute("accountId");
-        final Float amount = Float.parseFloat(request.getParameter("amount"));
+        final Float amount = Float.parseFloat(request.getParameter("transferAmount"));
 
         if (accountId != null) {
+
             BankDAOImpl bankDAO = new BankDAOImpl();
             ClientDAOImpl clientDAO = new ClientDAOImpl();
             AccountDAOImpl accountDAO = new AccountDAOImpl();
 
             try {
-                Bank bank = bankDAO.getBankByName("MY BANK");
+                Bank bank = bankDAO.getBankByName("PKO BP");
                 Client client = clientDAO.findClientByName(bank, clientName);
+                System.out.println(transferClientName);
+                Client transferClient = clientDAO.findClientByName(bank, transferClientName);
+
+                List<Account> accountList = (List<Account>) accountDAO.getClientAccounts(transferClient.getId());
+                transferClient.setActiveAccount(accountList.get(0));
+
                 Account account = accountDAO.getAccountById(accountId, client.getId());
+                Account transferAccount = transferClient.getActiveAccount();
 
                 account.withdraw(amount);
-                accountDAO.save(account);
+                transferAccount.deposit(amount);
 
-                request.getSession().setAttribute("activeAccount", account);
-                request.getRequestDispatcher("/logedin.jsp").forward(request, response);
+                accountDAO.save(account);
+                accountDAO.save(transferAccount);
+
+                request.getRequestDispatcher("/index1.jsp").forward(request, response);
+
             } catch (DAOException | NotEnoughFundsException e) {
                 e.printStackTrace();
             } catch (BankException e) {
-
                 e.printStackTrace();
             }
         } else {
-            response.sendRedirect("/setActiveAccount");
+            response.sendRedirect("/changeAccount");
         }
     }
 }

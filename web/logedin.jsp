@@ -20,7 +20,7 @@
 	<div id="container">
 
 		<div class="rectangle">
-			<div id="logo" class="tilelinkhtml5">Logged Client: <%=session.getAttribute("clientName")%></div>
+			<div <a href="index.jsp" id="logo" class="tilelinkhtml5">Logged Client: <%=session.getAttribute("clientName")%></a></div>
 			<div id="zegar">     12:00:00</div>
 			<div style="clear: both;"></div>
 		</div>
@@ -32,16 +32,19 @@
 			</div>
 
 			<div class="tile1">
-				<a href="setActiveAccount.jsp" class="tilelink"><i class="icon-ok-squared"></i><br />Set Active Account</a>
+				<a href="${pageContext.request.contextPath}/setActiveAccount" class="tilelink">
+					<i class="icon-ok-squared"></i><br />Set Active Account</a>
 			</div>
 
 			<div style="clear:both;"></div>
 
 			<div class="tile3">
-				<a href="addAccount.jsp" class="tilelink"><i class="icon-plus-squared"></i><br />Add Account</a>
+				<a href="${pageContext.request.contextPath}/addAccount" class="tilelink">
+					<i class="icon-plus-squared"></i><br />Add Account</a>
 			</div>
 			<div class="tile6">
-				<a href="removeAccount.jsp" class="tilelink"><i class="icon-minus-squared"></i><br />Remove Account</a>
+				<a href="${pageContext.request.contextPath}/removeAccount" class="tilelink">
+					<i class="icon-minus-squared"></i><br />Remove Account</a>
 			</div>
 			<div style="clear:both;"></div>
 
@@ -55,16 +58,16 @@
 
 			</div>
 			<div class="deposit">
-				<a href="deposite.jsp" class="operationlink"><i class="icon-download-outline"></i><br />Deposit</a>
+				<a href="${pageContext.request.contextPath}/deposite" class="operationlink"><i class="icon-download-outline"></i><br />Deposit</a>
 			</div>
 			<div class="withdraw">
-				<a href="withdraw.jsp" class="operationlink"><i class=" icon-upload-outline"></i><br />Withdraw</a>
+				<a href="${pageContext.request.contextPath}/withdraw" class="operationlink"><i class=" icon-upload-outline"></i><br />Withdraw</a>
 			</div>
 			<div class="transfer">
-				<a href="transfer.jsp" class="operationlink"><i class=" icon-export"></i><br />Transfer</a>
+				<a href="${pageContext.request.contextPath}/transfer" class="operationlink"><i class=" icon-export"></i><br />Transfer</a>
 			</div>
 			<div class="something">
-				<a href="http://google.com" class="operationlink"><i class=" icon-money"></i><br />Something</a>
+				<a href="${pageContext.request.contextPath}/something"  class="operationlink"><i class=" icon-money"></i><br />Something</a>
 			</div>
 			<div style="clear:both;"></div>
 		</div>

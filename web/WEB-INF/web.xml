@@ -19,7 +19,6 @@
         <welcome-file>login</welcome-file>
     </welcome-file-list>
 
-
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.luxoft.bankapp.servlets.LoginServlet</servlet-class>
@@ -29,7 +28,6 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
 
     <listener>
         <listener-class>com.luxoft.bankapp.servlets.SessionListener</listener-class>
@@ -65,7 +63,92 @@
         <url-pattern>/bankStatistics</url-pattern>
     </servlet-mapping>
 
+<!--dddd-->
+    <servlet>
+        <servlet-name>AddAccountServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.AddAccountServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>AddAccountServlet</servlet-name>
+        <url-pattern>/addAccount</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddNewClientServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.AddNewClientServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddNewClientServlet</servlet-name>
+        <url-pattern>/addNewClient</url-pattern>
+    </servlet-mapping>
+
+    <!--dddd-->
+    <servlet>
+        <servlet-name>DepositeServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.DepositeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DepositeServlet</servlet-name>
+        <url-pattern>/deposite</url-pattern>
+    </servlet-mapping>
+
+    <!--dddd-->
+    <servlet>
+        <servlet-name>RemoveAccountServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.RemoveAccountServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RemoveAccountServlet</servlet-name>
+        <url-pattern>/removeAccount</url-pattern>
+    </servlet-mapping>
+
+    <!--dddd-->
+    <servlet>
+        <servlet-name>RemoveClientServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.RemoveClientServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RemoveClientServlet</servlet-name>
+        <url-pattern>/removeClient</url-pattern>
+    </servlet-mapping>
+
+    <!--dddd-->
+    <servlet>
+        <servlet-name>SetActiveAccountServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.SetActiveAccountServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SetActiveAccountServlet</servlet-name>
+        <url-pattern>/setActiveAccount</url-pattern>
+    </servlet-mapping>
+
+    <!--dddd-->
+    <servlet>
+        <servlet-name>TransferServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.TransferServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TransferServlet</servlet-name>
+        <url-pattern>/transfer</url-pattern>
+    </servlet-mapping>
+
+    <!--dddd-->
+    <servlet>
+        <servlet-name>WithdrawServlet</servlet-name>
+        <servlet-class>com.luxoft.bankapp.servlets.WithdrawServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WithdrawServlet</servlet-name>
+        <url-pattern>/withdraw</url-pattern>
+    </servlet-mapping>
 
 
 

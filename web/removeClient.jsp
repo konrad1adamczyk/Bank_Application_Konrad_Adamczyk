@@ -48,8 +48,19 @@
 		</div>
 		<div class="square">
 			<div class="tile5a">
-				Write name and surname of the client you want to remove.<br /><br />
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pulvinar ipsum mauris, ac elementum felis convallis non. Duis aliquam felis vel dignissim tincidunt. In tellus mauris, tempor rutrum blandit in, efficitur ac quam. Mauris eu orci scelerisque, placerat eros id, condimentum justo. Suspendisse ac mattis orci, at mollis orci. 
+				<form id="form" action="/removeClient" method="POST" target="_self">
+					<table>
+						<tr><td colspan=2 style="font-weight:bold;"></br>Please, type the name of client to remove:</td></tr>
+
+						<td>Name:</td>
+						<td><input type="text" name="clientName" id="name"/></td>
+						<td id="nameError" class="error"></td>
+
+						</tr><tr><td>
+						<input type="submit" onclick="return checkForm();" value="Submit">
+					</td></tr>
+					</table>
+				</form>
 			</div>
 		</div>
 		<div style="clear: both;"></div>

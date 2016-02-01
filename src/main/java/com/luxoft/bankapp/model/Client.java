@@ -28,6 +28,7 @@ public class Client implements Report, Comparable<Client> , Serializable
 //	private List<Account> listOfAccounts = new ArrayList<Account>();
 	@NoDB private Account activeAccount;
 
+
 	private float initialOverdraft;
 	private float debt;
 
@@ -287,6 +288,11 @@ public class Client implements Report, Comparable<Client> , Serializable
 
 	public float getDebt() {
 		return debt;
+	}
+
+
+	public void setInitialOverdraft(float initialOverdraft) {
+		this.initialOverdraft = initialOverdraft;
 	}
 
 	public void setDebt(float debt) {

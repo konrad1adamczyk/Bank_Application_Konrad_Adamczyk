@@ -6,7 +6,6 @@ import com.luxoft.bankapp.database.ClientDAOImpl;
 import com.luxoft.bankapp.ecxeptions.BankException;
 import com.luxoft.bankapp.ecxeptions.BankNotFoundException;
 import com.luxoft.bankapp.ecxeptions.DAOException;
-import com.luxoft.bankapp.ecxeptions.NotEnoughFundsException;
 import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
 import com.luxoft.bankapp.model.Client;
@@ -18,16 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Konrad on 31.01.2016.
+ * Created by Konrad on 01.02.2016.
  */
-public class WithdrawServlet extends HttpServlet {
-
-
-
+public class DepositeServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         final String clientName = (String) request.getSession().getAttribute("clientName");
         final Integer accountId = (Integer) request.getSession().getAttribute("accountId");
-        final Float amount = Float.parseFloat(request.getParameter("amount"));
+        final Float amount = Float.parseFloat(request.getParameter("depositAmount"));
 
         if (accountId != null) {
             BankDAOImpl bankDAO = new BankDAOImpl();
@@ -35,19 +31,18 @@ public class WithdrawServlet extends HttpServlet {
             AccountDAOImpl accountDAO = new AccountDAOImpl();
 
             try {
-                Bank bank = bankDAO.getBankByName("MY BANK");
+                Bank bank = bankDAO.getBankByName("PKO BP");
                 Client client = clientDAO.findClientByName(bank, clientName);
                 Account account = accountDAO.getAccountById(accountId, client.getId());
 
-                account.withdraw(amount);
+                account.deposit(amount);
                 accountDAO.save(account);
 
-                request.getSession().setAttribute("activeAccount", account);
-                request.getRequestDispatcher("/logedin.jsp").forward(request, response);
-            } catch (DAOException | NotEnoughFundsException e) {
+                request.getRequestDispatcher("/deposite.jsp").forward(request, response);
+
+            } catch (DAOException e) {
                 e.printStackTrace();
             } catch (BankException e) {
-
                 e.printStackTrace();
             }
         } else {

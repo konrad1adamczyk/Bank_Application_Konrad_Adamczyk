@@ -50,17 +50,31 @@
 			<div class="tile5a">
 				<form action="form" method="POST" target="_blank">
 					<table>
+
+
 						<tr><td colspan=2 >New Client data:</td></tr>
 						<tr>
-							<td>Email:</td>
-							<td><input type="text" name="email"/></td>
+							<td>Name:</td>
+							<td><input type="text" name="name"/></td>
 						</tr><tr>
-						<td>Name:</td>
-						<td><input type="text" name="name"/></td>
-					</tr><tr>
-						<td>Password:</td>
-						<td><input type="text" name="password"/></td>
-					</tr>
+							<td>City:</td>
+							<td><input type="text" city="city"/></td>
+						</tr><tr>
+							<td>Gender - m / f:</td>
+							<td><input type="text" gender="gender"/></td>
+						</tr><tr>
+							<td>Email:</td>
+							<td><input type="text" email="email"/></td>
+						</tr><tr>
+							<td>Phone:</td>
+							<td><input type="text" phone="phone"/></td>
+						</tr><tr>
+							<td>Debt:</td>
+							<td><input type="text" debt="debt"/></td>
+						</tr><tr>
+							<td>Overdraft:</td>
+							<td><input type="text" overdraft="overdraft"/></td>
+						</tr>
 					</table>
 
 					<button onclick>  <a href="logedin.jsp" class="tilelink2"> Submit  </a>  </button>
