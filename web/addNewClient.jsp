@@ -48,9 +48,8 @@
 		</div>
 		<div class="square">
 			<div class="tile5a">
-				<form action="form" method="POST" target="_blank">
+                <form id="form" action="/addNewClient" method="POST" target="_self">
 					<table>
-
 
 						<tr><td colspan=2 >New Client data:</td></tr>
 						<tr>
@@ -77,7 +76,8 @@
 						</tr>
 					</table>
 
-					<button onclick>  <a href="logedin.jsp" class="tilelink2"> Submit  </a>  </button>
+                    <input type="submit" onclick="return checkForm();" value="Submit">
+					<%--<button onclick>  <a href="logedin.jsp" class="tilelink2"> Submit  </a>  </button>--%>
 				</form>
 
 			</div>
