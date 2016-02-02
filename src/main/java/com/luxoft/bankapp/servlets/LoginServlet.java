@@ -40,20 +40,20 @@ public class LoginServlet extends HttpServlet {
             throw new ServletException("No client specified.");
         }
 
-        String clientInfo = new String();
+//        String clientInfo = "";
 
         if(checkName(clientName)){
+
             try {
-                clientInfo = bank.getClient(clientName).printReport2();
+                String clientInfo = bank.getClient(clientName).printReport2();
+                request.getSession().setAttribute("clientInfo", clientInfo);
+                request.getSession().setAttribute("clientName", clientName);
+                logger.info("Client " + clientName + " logged into ATM");
+                response.sendRedirect("logedin.jsp");
+
             } catch (ClientNotExistsException e) {
                 e.printStackTrace();
             }
-            request.getSession().setAttribute("clientInfo", clientInfo);
-
-            request.getSession().setAttribute("clientName", clientName);
-            logger.info("Client " + clientName + " logged into ATM");
-            response.sendRedirect("logedin.jsp");
-
         } else {
             response.sendRedirect("login.jsp");
         }
