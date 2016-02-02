@@ -70,8 +70,6 @@ public class LoginServlet extends HttpServlet {
 
             for (Client client : listOfClients){
                 client.setListOfAccounts(accountDAO.getClientAccounts(client.getId()));
-
-                client.printReport();
             }
 
         } catch (DAOException e) {
@@ -84,10 +82,7 @@ public class LoginServlet extends HttpServlet {
 
         Client theClient = new Client();
 
-        System.out.println(name);
         for(Client client: bank.getListOfClients()) {
-
-            System.out.println(client.getName());
             if ( client.getName().equals(name)){
                 theClient=client;
             }

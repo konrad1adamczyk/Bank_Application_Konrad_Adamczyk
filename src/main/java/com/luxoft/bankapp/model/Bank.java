@@ -31,34 +31,34 @@ public class Bank implements Report
 		this.id = counter++;
 		listOfClients = new TreeSet<>();
 
-		class PrintClientListener implements ClientRegistrationListener {
-
-			@Override
-			public void onClientAdded(Client client) {
-				System.out.println(client.getClientSalutation() + " " + client.getName() + " is our new client" );
-			}
-		}
-		class EmailNotificationListener implements ClientRegistrationListener {
-
-			@Override
-			public void onClientAdded(Client client) {
-				System.out.println("Notification email for client " + client.getName() + " to be sent" );
-			}
-		}
-
-		class DebugListener implements ClientRegistrationListener {
-
-			@Override
-			public void onClientAdded(Client client) {
-				System.out.println(client.getName() + " " + new GregorianCalendar().getTime() );
-			}
-		}
-
-		eventListeners = new HashSet<ClientRegistrationListener>();
-
-		registerEvent(new PrintClientListener());
-		registerEvent(new EmailNotificationListener());
-		registerEvent(new DebugListener());
+//		class PrintClientListener implements ClientRegistrationListener {
+//
+//			@Override
+//			public void onClientAdded(Client client) {
+//				System.out.println(client.getClientSalutation() + " " + client.getName() + " is our new client" );
+//			}
+//		}
+//		class EmailNotificationListener implements ClientRegistrationListener {
+//
+//			@Override
+//			public void onClientAdded(Client client) {
+//				System.out.println("Notification email for client " + client.getName() + " to be sent" );
+//			}
+//		}
+//
+//		class DebugListener implements ClientRegistrationListener {
+//
+//			@Override
+//			public void onClientAdded(Client client) {
+//				System.out.println(client.getName() + " " + new GregorianCalendar().getTime() );
+//			}
+//		}
+//
+//		eventListeners = new HashSet<ClientRegistrationListener>();
+//
+//		registerEvent(new PrintClientListener());
+//		registerEvent(new EmailNotificationListener());
+//		registerEvent(new DebugListener());
 	}
 
 
