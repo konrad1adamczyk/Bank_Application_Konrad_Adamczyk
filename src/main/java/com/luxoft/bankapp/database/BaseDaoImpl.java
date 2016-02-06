@@ -1,6 +1,9 @@
 package com.luxoft.bankapp.database;
 
+
 import com.luxoft.bankapp.ecxeptions.DAOException;
+
+import java.sql.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +19,9 @@ public class BaseDaoImpl implements BaseDAO {
     Logger databaseLog = Logger.getLogger("database." + this.getClass().getName());
     Logger exceptionLog = Logger.getLogger("exceptions." + this.getClass().getName());
 
-    @Override
+
+
+    @Override              // stara wersja połączenia z h2
     public Connection openConnection() throws DAOException {
         try {
             Class.forName("org.h2.Driver"); // this is driver for H2
